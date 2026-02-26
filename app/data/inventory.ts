@@ -22,7 +22,7 @@ export const INVENTORY_DATA: Category[] = [
     slug: toSlug("Fastening & Joining"),
     items: [
       {
-        name: "Anchors",
+        name: "Wedge anchor",
         imagePath: "/fastening\\anchor.webp",
         categoryId: "Cat-001",
         quantity: undefined

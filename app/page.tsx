@@ -4,6 +4,7 @@ import HomeBanner from "./components/HomeBanner";
 import { prisma } from "@/lib/prisma";
 import Image from "next/image";
 import Link from "next/link";
+import { getFinalCustomerPrice } from "@/lib/pricing";
 
 export const dynamic = "force-dynamic";
 
@@ -66,7 +67,9 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
             </div>
           ) : (
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {products.map((product) => (
+              {products.map((product) => {
+                const finalPrice = getFinalCustomerPrice(product.price, product.specs as Record<string, unknown> | null);
+                return (
                 <Link 
                   key={product.id} 
                   href={`/product/${product.slug}`}
@@ -98,12 +101,13 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                     </h3>
                     
                     <div className="mt-auto pt-3 flex items-center justify-between">
-                      <span className="font-bold text-lg">₹{product.price.toLocaleString("en-IN")}</span>
+                      <span className="font-bold text-lg">₹{finalPrice.toLocaleString("en-IN")}</span>
                       <button className="text-xs text-gray-400 border px-2 py-1 rounded hover:bg-gray-100">View</button>
                     </div>
                   </div>
                 </Link>
-              ))}
+                );
+              })}
             </div>
           )}
         </div>

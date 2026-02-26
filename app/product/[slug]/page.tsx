@@ -15,6 +15,7 @@ import {
 // 1. IMPORT COMPONENTS
 import ProductActions from "./../../components/ProductActions"; 
 import ProductImageGallery from "@/components/ProductImageGallery";
+import { getFinalCustomerPrice, stripCommissionSpecs } from "@/lib/pricing";
 
 export const dynamic = "force-dynamic";
 
@@ -42,11 +43,13 @@ export default async function ProductDetailsPage({
   };
 
   // Helper for Specs
-  const specs = (product.specs as Record<string, string>) || {};
+  const specs = stripCommissionSpecs(product.specs as Record<string, unknown> | null);
+  const finalPrice = getFinalCustomerPrice(product.price, product.specs as Record<string, unknown> | null);
 
   // Calculate Discount (Mock logic)
-  const fakeMrp = Math.round(product.price * 1.25);
-  const discountPercent = Math.round(((fakeMrp - product.price) / fakeMrp) * 100);
+  const fakeMrp = Math.round(finalPrice * 1.25);
+  const discountPercent = fakeMrp > 0 ? Math.round(((fakeMrp - finalPrice) / fakeMrp) * 100) : 0;
+  const productForCustomer = { ...product, price: finalPrice };
 
   return (
     <div className="min-h-screen bg-white font-sans text-gray-800">
@@ -124,7 +127,7 @@ export default async function ProductDetailsPage({
             <div className="bg-blue-50/30 p-5 rounded-xl border border-blue-50 mb-8">
                <div className="flex items-end gap-3 mb-2">
                   <span className="text-4xl font-bold text-[#00529b]">
-                    ₹{product.price.toLocaleString("en-IN")}
+                    ₹{finalPrice.toLocaleString("en-IN")}
                   </span>
                   <span className="text-gray-400 text-lg line-through decoration-gray-400 decoration-1 mb-1">
                     ₹{fakeMrp.toLocaleString("en-IN")}
@@ -138,7 +141,7 @@ export default async function ProductDetailsPage({
 
             {/* 3. Action Buttons */}
             <div className="mb-8">
-               <ProductActions product={product} vendor={vendorForDisplay} />
+               <ProductActions product={productForCustomer} vendor={vendorForDisplay} />
             </div>
 
             {/* 4. Trust Badges (Grid) */}

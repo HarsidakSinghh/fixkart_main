@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { auth } from "@clerk/nextjs/server"; 
 import { INVENTORY_DATA } from "@/app/data/inventory"; 
+import { getFinalCustomerPrice } from "@/lib/pricing";
 
 export const dynamic = "force-dynamic"; // Ensures we don't cache old data
 
@@ -104,7 +105,9 @@ export default async function BrowseSubCategoryPage({
           </div>
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-6">
-            {filteredProducts.map((product) => (
+            {filteredProducts.map((product) => {
+              const finalPrice = getFinalCustomerPrice(product.price, product.specs as Record<string, unknown> | null);
+              return (
               <div key={product.id} className="bg-white rounded-xl shadow-sm border border-gray-100 p-3 hover:shadow-md transition-all relative group">
                 <Link href={`/product/${product.slug}`} className="block">
                   <div className="relative aspect-square mb-3 bg-gray-50 rounded-lg overflow-hidden">
@@ -120,14 +123,15 @@ export default async function BrowseSubCategoryPage({
                     {product.title || product.name}
                   </h3>
                   <div className="mt-2 flex items-center justify-between">
-                    <span className="text-[#00529b] font-bold text-sm">₹{product.price}</span>
+                    <span className="text-[#00529b] font-bold text-sm">₹{finalPrice.toLocaleString("en-IN")}</span>
                     <span className="text-xs text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded">
                       Qty: {product.quantity}
                     </span>
                   </div>
                 </Link>
               </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>
