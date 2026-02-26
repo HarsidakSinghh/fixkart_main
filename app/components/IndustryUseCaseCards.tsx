@@ -3,109 +3,109 @@ const useCases = [
     title: "Decrease Unplanned Downtime",
     description:
       "AI-powered monitoring predicts failures early, helping teams intervene before critical stoppages impact production.",
-    image: "/industry/usecases/decrease-unplanned-downtime.jpg",
+    image: "/indus/predic.png",
   },
   {
     title: "Avoid Reputation-Damaging Outages",
     description:
       "Anomaly detection and continuous diagnostics reduce unexpected breakdowns and improve service reliability.",
-    image: "/industry/usecases/avoid-outages.jpg",
+    image: "/indus/predict-ai-damaging-outages.png",
   },
   {
     title: "Improve Employee Productivity",
     description:
       "Smarter workflows and real-time insights help operators focus on high-value tasks with fewer manual checks.",
-    image: "/industry/usecases/improve-employee-productivity.jpg",
+    image: "/indus/emplye.png",
   },
   {
     title: "Reduce Field Service Costs",
     description:
       "Remote diagnostics and condition-based service planning reduce unnecessary visits and maintenance overhead.",
-    image: "/industry/usecases/reduce-field-service-costs.jpg",
+    image: "/indus/1.png",
   },
   {
     title: "Increase Asset Quality",
     description:
       "Unified dashboards track health and performance across assets, extending lifecycle and improving utilization.",
-    image: "/industry/usecases/increase-asset-quality.jpg",
+    image: "/indus/assetqual.png",
   },
   {
     title: "Improve Worker Safety",
     description:
       "Vision-led safety checks in hazardous zones strengthen compliance, reduce risk exposure, and support safer operations.",
-    image: "/industry/usecases/improved-worker-safety.jpg",
+    image: "/indus/safety.webp",
   },
   {
     title: "Enhancing Worker Safety in Robotic Cells",
     description:
       "Integrated machine vision with robotics helps detect intrusion events and enforce safe zones around robotic cells.",
-    image: "/industry/usecases/robotic-cell-safety.jpg",
+    image: "/indus/defect_detect.png",
   },
   {
     title: "Workforce Safety",
     description:
       "Real-time monitoring and tracking reduce hazards across factories, construction zones, and industrial sites.",
-    image: "/industry/usecases/workforce-safety.jpg",
+    image: "/indus/safety.webp",
   },
   {
     title: "Security Enhancement",
     description:
       "Video intelligence enhances visibility and incident response across warehouses, plants, and commercial campuses.",
-    image: "/industry/usecases/security-enhancement.jpg",
+    image: "/indus/securityenhance.png",
   },
   {
     title: "Quality Control",
     description:
       "Automated object detection and classification improve consistency and accelerate root-cause discovery in production.",
-    image: "/industry/usecases/quality-control.jpg",
+    image: "/indus/defect_detect.png",
   },
   {
     title: "Audience / Visitor Analytics",
     description:
       "Behavior and footfall analytics support queue management, anomaly detection, and visitor experience optimization.",
-    image: "/industry/usecases/visitor-analytics.jpg",
+    image: "/indus/3.webp",
   },
   {
     title: "Energy Management",
     description:
       "Optimize plant energy consumption with AI-driven insights for higher efficiency and lower operating costs.",
-    image: "/industry/usecases/energy-management.jpg",
+    image: "/indus/1.png",
   },
   {
     title: "Reduce Carbon Emission",
     description:
       "Improve resource efficiency and sustainability by tracking emission-heavy operations and reducing wasteful patterns.",
-    image: "/industry/usecases/reduce-carbon-emission.jpg",
+    image: "/indus/3.webp",
   },
   {
     title: "Energy Asset Monitoring",
     description:
       "Continuously monitor critical power assets for early anomaly detection and predictive maintenance planning.",
-    image: "/industry/usecases/energy-asset-monitoring.jpg",
+    image: "/indus/assetqual.png",
   },
   {
     title: "Inventory Optimization",
     description:
       "Gain supply-chain visibility to reduce stock costs while improving inventory availability and turnover.",
-    image: "/industry/usecases/inventory-optimization.jpg",
+    image: "/indus/spot-inventory-optimization.png",
   },
   {
     title: "Fleet Planning",
     description:
       "Improve fleet utilization and route efficiency with real-time status intelligence and proactive planning.",
-    image: "/industry/usecases/fleet-planning.jpg",
+    image: "/indus/fleet.png",
   },
   {
     title: "Warehouse Optimization",
     description:
       "Streamline warehouse operations through smarter planning, movement visibility, and workload balancing.",
-    image: "/industry/usecases/warehouse-optimization.jpg",
+    image: "/indus/warehouseoptimize.png",
   },
   {
     title: "Predictive Maintenance",
     description:
       "IoT and vision-based condition tracking generates maintenance timelines that reduce breakdowns and downtime.",
-    image: "/industry/usecases/predictive-maintenance.jpg",
+    image: "/indus/predic.png",
   },
 ];
 
