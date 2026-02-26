@@ -45,7 +45,7 @@ const useCases = [
     title: "Workforce Safety",
     description:
       "Real-time monitoring and tracking reduce hazards across factories, construction zones, and industrial sites.",
-    image: "/indus/worksafe.jpeg",
+    image: "/indus/worksafe.png",
   },
   {
     title: "Security Enhancement",
