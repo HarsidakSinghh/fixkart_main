@@ -55,7 +55,7 @@ export default function CategoryShowcase() {
   const nextPage = () => setCurrentIndex((prev) => (prev + 1) % totalSlides);
 
   return (
-    <section className="mt-6 md:mt-8 rounded-3xl bg-white p-6 md:p-8 shadow-[0_14px_36px_-30px_rgba(20,55,110,0.45)]">
+    <section className="mt-1 md:mt-2 rounded-3xl bg-white p-6 md:p-8 shadow-[0_14px_36px_-30px_rgba(20,55,110,0.45)]">
       <div className="mb-5 flex items-end justify-between">
         <div>
           <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Welcome</h2>
