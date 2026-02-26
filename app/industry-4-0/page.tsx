@@ -1,6 +1,5 @@
 import { Camera, CheckCircle2, ShieldCheck, Target } from "lucide-react";
-import IndustryUseCasesPanel from "@/app/components/IndustryUseCasesPanel";
-import AdvancedIndustrialSolutions from "@/app/components/AdvancedIndustrialSolutions";
+import IndustryUseCaseCards from "@/app/components/IndustryUseCaseCards";
 
 const pillars = [
   {
@@ -117,9 +116,7 @@ export default function Industry40Page() {
           </div>
         </section>
 
-        <AdvancedIndustrialSolutions />
-
-        <IndustryUseCasesPanel />
+        <IndustryUseCaseCards />
 
         <section className="mt-12 rounded-3xl border border-[#dde6f5] bg-white p-8 md:p-12 shadow-[0_14px_36px_-30px_rgba(20,55,110,0.45)]">
           <div className="flex items-center gap-2 text-[#00529b]">
