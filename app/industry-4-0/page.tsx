@@ -23,11 +23,26 @@ const pillars = [
 ];
 
 const outcomes = [
-  "Lower rejection and rework rates",
-  "Reduced unplanned downtime",
-  "Improved traceability across operations",
-  "Faster root-cause analysis",
-  "Higher OEE and throughput stability",
+  {
+    title: "Lower Rejection and Rework Rates",
+    detail: "Improve first-pass quality with early defect detection and consistent inspection decisions.",
+  },
+  {
+    title: "Reduced Unplanned Downtime",
+    detail: "Detect anomalies sooner and schedule corrective actions before breakdowns affect production.",
+  },
+  {
+    title: "Improved Traceability Across Operations",
+    detail: "Maintain complete event trails from inspection to dispatch for better control and compliance.",
+  },
+  {
+    title: "Faster Root-Cause Analysis",
+    detail: "Use visual evidence and timeline data to quickly isolate process bottlenecks and failure points.",
+  },
+  {
+    title: "Higher OEE and Throughput Stability",
+    detail: "Stabilize line performance with real-time monitoring, alerts, and continuous optimization loops.",
+  },
 ];
 
 const metrics = [
@@ -100,15 +115,22 @@ export default function Industry40Page() {
 
         <IndustryUseCaseCards />
 
-        <section className="mt-12 rounded-3xl border border-[#dde6f5] bg-white p-8 md:p-12 shadow-[0_14px_36px_-30px_rgba(20,55,110,0.45)]">
-          <div className="flex items-center gap-2 text-[#00529b]">
+        <section className="mt-12 rounded-3xl bg-gradient-to-br from-[#0f2243] to-[#0a356f] p-8 md:p-12 shadow-[0_18px_40px_-26px_rgba(9,35,78,0.85)]">
+          <div className="flex items-center gap-2 text-blue-100">
             <Camera size={18} />
-            <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Business Outcomes</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-white">Business Outcomes</h2>
           </div>
-          <ul className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-slate-700">
+          <p className="mt-2 text-blue-100/80 text-sm md:text-base">
+            Measurable impact delivered through AI-driven operations intelligence.
+          </p>
+          <ul className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
             {outcomes.map((outcome) => (
-              <li key={outcome} className="rounded-lg border border-slate-100 bg-slate-50/70 px-4 py-3">
-                {outcome}
+              <li
+                key={outcome.title}
+                className="rounded-2xl border border-white/15 bg-white/10 backdrop-blur px-5 py-4"
+              >
+                <p className="text-white font-semibold">{outcome.title}</p>
+                <p className="mt-1.5 text-blue-100/90 text-sm leading-6">{outcome.detail}</p>
               </li>
             ))}
           </ul>
