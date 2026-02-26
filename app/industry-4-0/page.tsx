@@ -1,20 +1,27 @@
 import { Camera, CheckCircle2, ShieldCheck, Target } from "lucide-react";
+import IndustryUseCasesPanel from "@/app/components/IndustryUseCasesPanel";
 
 const pillars = [
   {
     title: "Quality Inspection",
     body: "Vision models detect dimensional errors, surface defects, and packaging issues during production instead of post-production.",
     icon: CheckCircle2,
+    image:
+      "https://images.unsplash.com/photo-1581092921461-39b9d08a9b2a?auto=format&fit=crop&w=1200&q=80",
   },
   {
     title: "Safety Monitoring",
     body: "Real-time scene analysis checks PPE usage, restricted-zone access, and unsafe motion around active equipment.",
     icon: ShieldCheck,
+    image:
+      "https://images.unsplash.com/photo-1581093450021-4a7360e9a6f6?auto=format&fit=crop&w=1200&q=80",
   },
   {
     title: "Process Optimization",
     body: "Continuous visual tracking highlights bottlenecks, cycle-time drift, and line performance losses.",
     icon: Target,
+    image:
+      "https://images.unsplash.com/photo-1565799557186-1c6f441b7794?auto=format&fit=crop&w=1200&q=80",
   },
 ];
 
@@ -60,6 +67,23 @@ export default function Industry40Page() {
           </div>
         </header>
 
+        <section className="mt-10 overflow-hidden rounded-3xl border border-[#dde6f5] bg-white shadow-[0_14px_36px_-30px_rgba(20,55,110,0.45)]">
+          <div className="relative h-52 md:h-72">
+            <img
+              src="https://images.unsplash.com/photo-1581092786450-7ef25f140997?auto=format&fit=crop&w=1800&q=80"
+              alt="Industry 4.0 automation floor"
+              className="h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0b2344]/75 via-[#0b2344]/55 to-transparent" />
+            <div className="absolute inset-0 p-6 md:p-10 flex flex-col justify-end">
+              <p className="text-white text-xs md:text-sm tracking-[0.14em] uppercase font-semibold">Computer Vision Platform</p>
+              <h2 className="mt-2 text-white text-2xl md:text-4xl font-extrabold max-w-2xl">
+                Real-time visibility for quality, safety, and production performance
+              </h2>
+            </div>
+          </div>
+        </section>
+
         <section className="mt-12 rounded-3xl border border-[#dde6f5] bg-white p-8 md:p-12 shadow-[0_14px_36px_-30px_rgba(20,55,110,0.45)]">
           <h2 className="text-2xl md:text-3xl font-bold">How It Works</h2>
           <div className="mt-6 space-y-5 text-slate-600 leading-8 text-[15px] md:text-base">
@@ -82,6 +106,9 @@ export default function Industry40Page() {
                 key={item.title}
                 className="rounded-2xl border border-[#dbe5f7] bg-gradient-to-br from-white to-[#f7faff] p-6 shadow-[0_16px_30px_-26px_rgba(0,65,150,0.6)] hover:shadow-[0_24px_38px_-26px_rgba(0,65,150,0.5)] hover:-translate-y-0.5 transition-all"
               >
+                <div className="mb-4 h-36 rounded-xl overflow-hidden border border-[#d9e4f6]">
+                  <img src={item.image} alt={item.title} className="h-full w-full object-cover" />
+                </div>
                 <div className="inline-flex items-center gap-2 rounded-full border border-[#cfe0ff] bg-[#eef4ff] px-3 py-1.5 text-[#00529b]">
                   <item.icon size={16} />
                   <p className="font-bold text-sm">{item.title}</p>
@@ -91,6 +118,8 @@ export default function Industry40Page() {
             ))}
           </div>
         </section>
+
+        <IndustryUseCasesPanel />
 
         <section className="mt-12 rounded-3xl border border-[#dde6f5] bg-white p-8 md:p-12 shadow-[0_14px_36px_-30px_rgba(20,55,110,0.45)]">
           <div className="flex items-center gap-2 text-[#00529b]">
