@@ -16,8 +16,7 @@ const useCaseItems: UseCaseItem[] = [
     id: "predict-ai",
     title: "Predict.AI",
     subtitle: "Predictive Maintenance",
-    image:
-      "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&w=1400&q=80",
+    image: "/industry/contactless-monitoring.svg",
     summary: "Detect machine wear patterns early and prevent unplanned failures.",
     points: [
       "Identify abnormal vibration and thermal signatures.",
@@ -29,8 +28,7 @@ const useCaseItems: UseCaseItem[] = [
     id: "trust-ai",
     title: "Trust.AI",
     subtitle: "Quality Assurance",
-    image:
-      "https://images.unsplash.com/photo-1581092921461-39b9d08a9b2a?auto=format&fit=crop&w=1400&q=80",
+    image: "/industry/defect-inspection.svg",
     summary: "Vision-based inspection for defect detection and process consistency.",
     points: [
       "Surface defect and dimensional checks in real time.",
@@ -42,8 +40,7 @@ const useCaseItems: UseCaseItem[] = [
     id: "conserve-ai",
     title: "Conserve.AI",
     subtitle: "Energy Optimization",
-    image:
-      "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1400&q=80",
+    image: "/industry/sustainable-edge-ai.svg",
     summary: "Optimize energy-intensive operations using visual and sensor intelligence.",
     points: [
       "Monitor equipment utilization against production output.",
@@ -55,8 +52,7 @@ const useCaseItems: UseCaseItem[] = [
     id: "track-ai",
     title: "Track.AI",
     subtitle: "Asset & Flow Visibility",
-    image:
-      "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=1400&q=80",
+    image: "/industry/llm-data-management.svg",
     summary: "Track assets, material movement, and logistics status across sites.",
     points: [
       "Locate critical tools, pallets, and inventory quickly.",
@@ -68,8 +64,7 @@ const useCaseItems: UseCaseItem[] = [
     id: "spot-ai",
     title: "Spot.AI",
     subtitle: "Safety & Compliance",
-    image:
-      "https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=1400&q=80",
+    image: "/industry/safety-security.svg",
     summary: "Protect workers and enforce policy with real-time scene intelligence.",
     points: [
       "Detect PPE non-compliance in high-risk zones.",

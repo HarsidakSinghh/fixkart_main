@@ -1,27 +1,25 @@
 import { Camera, CheckCircle2, ShieldCheck, Target } from "lucide-react";
 import IndustryUseCasesPanel from "@/app/components/IndustryUseCasesPanel";
+import AdvancedIndustrialSolutions from "@/app/components/AdvancedIndustrialSolutions";
 
 const pillars = [
   {
     title: "Quality Inspection",
     body: "Vision models detect dimensional errors, surface defects, and packaging issues during production instead of post-production.",
     icon: CheckCircle2,
-    image:
-      "https://images.unsplash.com/photo-1581092921461-39b9d08a9b2a?auto=format&fit=crop&w=1200&q=80",
+    image: "/industry/defect-inspection.svg",
   },
   {
     title: "Safety Monitoring",
     body: "Real-time scene analysis checks PPE usage, restricted-zone access, and unsafe motion around active equipment.",
     icon: ShieldCheck,
-    image:
-      "https://images.unsplash.com/photo-1581093450021-4a7360e9a6f6?auto=format&fit=crop&w=1200&q=80",
+    image: "/industry/safety-security.svg",
   },
   {
     title: "Process Optimization",
     body: "Continuous visual tracking highlights bottlenecks, cycle-time drift, and line performance losses.",
     icon: Target,
-    image:
-      "https://images.unsplash.com/photo-1565799557186-1c6f441b7794?auto=format&fit=crop&w=1200&q=80",
+    image: "/industry/contactless-monitoring.svg",
   },
 ];
 
@@ -70,7 +68,7 @@ export default function Industry40Page() {
         <section className="mt-10 overflow-hidden rounded-3xl border border-[#dde6f5] bg-white shadow-[0_14px_36px_-30px_rgba(20,55,110,0.45)]">
           <div className="relative h-52 md:h-72">
             <img
-              src="https://images.unsplash.com/photo-1581092786450-7ef25f140997?auto=format&fit=crop&w=1800&q=80"
+              src="/industry/llm-data-management.svg"
               alt="Industry 4.0 automation floor"
               className="h-full w-full object-cover"
             />
@@ -118,6 +116,8 @@ export default function Industry40Page() {
             ))}
           </div>
         </section>
+
+        <AdvancedIndustrialSolutions />
 
         <IndustryUseCasesPanel />
 
