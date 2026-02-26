@@ -63,13 +63,13 @@ const useCases = [
     title: "Audience / Visitor Analytics",
     description:
       "Behavior and footfall analytics support queue management, anomaly detection, and visitor experience optimization.",
-    image: "/indus/visiter.webp",
+    image: "/indus/visitor.png",
   },
   {
     title: "Energy Management",
     description:
       "Optimize plant energy consumption with AI-driven insights for higher efficiency and lower operating costs.",
-    image: "/indus/1.png",
+    image: "/indus/mans.png",
   },
   {
     title: "Reduce Carbon Emission",

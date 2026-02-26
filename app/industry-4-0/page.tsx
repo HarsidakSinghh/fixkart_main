@@ -1,5 +1,6 @@
 import { Camera, CheckCircle2, ShieldCheck, Target } from "lucide-react";
 import IndustryUseCaseCards from "@/app/components/IndustryUseCaseCards";
+import { INVENTORY_DATA } from "@/app/data/inventory";
 
 const pillars = [
   {
@@ -37,6 +38,15 @@ const metrics = [
 ];
 
 export default function Industry40Page() {
+  const categoryShowcase = INVENTORY_DATA.slice(0, 8).map((category) => {
+    const rawImage = category.items[0]?.imagePath || "";
+    const normalizedImage = rawImage.replace(/\\/g, "/");
+    return {
+      title: category.title,
+      image: normalizedImage.startsWith("/") ? normalizedImage : `/${normalizedImage}`,
+    };
+  });
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#f7f9fc] via-[#f5f8ff] to-[#eef3fb] text-slate-900">
       <div className="max-w-6xl mx-auto px-5 md:px-10 py-16 md:py-20">
@@ -63,20 +73,24 @@ export default function Industry40Page() {
           </div>
         </header>
 
-        <section className="mt-10 overflow-hidden rounded-3xl border border-[#dde6f5] bg-white shadow-[0_14px_36px_-30px_rgba(20,55,110,0.45)]">
-          <div className="relative h-52 md:h-72">
-            <img
-              src="/industry/photos/hero.jpg"
-              alt="Industry 4.0 automation floor"
-              className="h-full w-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0b2344]/75 via-[#0b2344]/55 to-transparent" />
-            <div className="absolute inset-0 p-6 md:p-10 flex flex-col justify-end">
-              <p className="text-white text-xs md:text-sm tracking-[0.14em] uppercase font-semibold">Computer Vision Platform</p>
-              <h2 className="mt-2 text-white text-2xl md:text-4xl font-extrabold max-w-2xl">
-                Real-time visibility for quality, safety, and production performance
-              </h2>
+        <section className="mt-10 rounded-3xl border border-[#dde6f5] bg-white p-6 md:p-8 shadow-[0_14px_36px_-30px_rgba(20,55,110,0.45)]">
+          <div className="flex items-end justify-between gap-4 mb-5">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Category Showcase</h2>
+              <p className="mt-1 text-slate-600 text-sm md:text-base">One representative product image from each category.</p>
             </div>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
+            {categoryShowcase.map((item) => (
+              <article key={item.title} className="rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-sm hover:shadow-md transition-all">
+                <div className="h-36 md:h-40 bg-slate-100">
+                  <img src={item.image} alt={item.title} className="h-full w-full object-contain p-2" />
+                </div>
+                <div className="p-3 border-t border-slate-100">
+                  <p className="text-sm font-semibold text-slate-800 line-clamp-2">{item.title}</p>
+                </div>
+              </article>
+            ))}
           </div>
         </section>
 
