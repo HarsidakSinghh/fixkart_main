@@ -20,7 +20,7 @@ export default function CategoryShowcase() {
     []
   );
 
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [cardsPerPage, setCardsPerPage] = useState(4);
 
   useEffect(() => {
@@ -39,34 +39,26 @@ export default function CategoryShowcase() {
     return () => window.removeEventListener("resize", updateCardsPerPage);
   }, []);
 
-  const totalPages = Math.max(1, Math.ceil(items.length / cardsPerPage));
+  const totalSlides = items.length;
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentPage((prev) => (prev + 1) % totalPages);
+      setCurrentIndex((prev) => (prev + 1) % totalSlides);
     }, 4500);
 
     return () => clearInterval(interval);
-  }, [totalPages]);
+  }, [totalSlides]);
 
-  useEffect(() => {
-    if (currentPage >= totalPages) {
-      setCurrentPage(0);
-    }
-  }, [currentPage, totalPages]);
+  const visibleItems = Array.from({ length: cardsPerPage }, (_, index) => items[(currentIndex + index) % items.length]);
 
-  const startIndex = currentPage * cardsPerPage;
-  const visibleItems = Array.from({ length: cardsPerPage }, (_, index) => items[(startIndex + index) % items.length]);
-
-  const prevPage = () => setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
-  const nextPage = () => setCurrentPage((prev) => (prev + 1) % totalPages);
+  const prevPage = () => setCurrentIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
+  const nextPage = () => setCurrentIndex((prev) => (prev + 1) % totalSlides);
 
   return (
-    <section className="mt-6 md:mt-8 rounded-3xl border border-[#dde6f5] bg-white p-6 md:p-8 shadow-[0_14px_36px_-30px_rgba(20,55,110,0.45)]">
+    <section className="mt-6 md:mt-8 rounded-3xl bg-white p-6 md:p-8 shadow-[0_14px_36px_-30px_rgba(20,55,110,0.45)]">
       <div className="mb-5 flex items-end justify-between">
         <div>
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Category Carousel</h2>
-          <p className="mt-1 text-slate-600 text-sm md:text-base">Rotating product/category cards in banner style.</p>
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Welcome</h2>
         </div>
         <div className="hidden md:flex items-center gap-2">
           <button
@@ -91,12 +83,12 @@ export default function CategoryShowcase() {
           <Link
             key={`${item.title}-${item.slug}`}
             href={`/browse/${item.slug}`}
-            className="rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-sm hover:shadow-md transition-all"
+            className="rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-all"
           >
             <div className="h-36 md:h-40 bg-slate-100">
               <img src={item.image} alt={item.title} className="h-full w-full object-contain p-2" />
             </div>
-            <div className="p-3 border-t border-slate-100">
+            <div className="p-3">
               <p className="text-sm font-semibold text-slate-800 line-clamp-2">{item.title}</p>
             </div>
           </Link>
@@ -104,11 +96,11 @@ export default function CategoryShowcase() {
       </div>
 
       <div className="mt-5 flex items-center justify-center gap-2">
-        {Array.from({ length: totalPages }).map((_, index) => (
+        {Array.from({ length: totalSlides }).map((_, index) => (
           <button
             key={index}
-            onClick={() => setCurrentPage(index)}
-            className={`h-2.5 rounded-full transition-all ${index === currentPage ? "w-8 bg-[#00529b]" : "w-2.5 bg-slate-300"}`}
+            onClick={() => setCurrentIndex(index)}
+            className={`h-2.5 rounded-full transition-all ${index === currentIndex ? "w-8 bg-[#00529b]" : "w-2.5 bg-slate-300"}`}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}

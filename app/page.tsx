@@ -124,7 +124,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
       {/* Spacer for Header */}
       <div className="w-full h-[70px]"></div>
 
-      <div className="max-w-7xl mx-auto px-4 md:px-6">
+      <div className="w-full">
         <CategoryShowcase />
       </div>
 
