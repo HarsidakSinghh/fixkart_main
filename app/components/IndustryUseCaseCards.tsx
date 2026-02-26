@@ -45,7 +45,7 @@ const useCases = [
     title: "Workforce Safety",
     description:
       "Real-time monitoring and tracking reduce hazards across factories, construction zones, and industrial sites.",
-    image: "/indus/safety.webp",
+    image: "/indus/worksafe.jpeg",
   },
   {
     title: "Security Enhancement",
@@ -57,13 +57,13 @@ const useCases = [
     title: "Quality Control",
     description:
       "Automated object detection and classification improve consistency and accelerate root-cause discovery in production.",
-    image: "/indus/defect_detect.png",
+    image: "/indus/qualcontrol.png",
   },
   {
     title: "Audience / Visitor Analytics",
     description:
       "Behavior and footfall analytics support queue management, anomaly detection, and visitor experience optimization.",
-    image: "/indus/3.webp",
+    image: "/indus/visiter.webp",
   },
   {
     title: "Energy Management",
@@ -75,13 +75,13 @@ const useCases = [
     title: "Reduce Carbon Emission",
     description:
       "Improve resource efficiency and sustainability by tracking emission-heavy operations and reducing wasteful patterns.",
-    image: "/indus/3.webp",
+    image: "/indus/reducecarbon.jpg",
   },
   {
     title: "Energy Asset Monitoring",
     description:
       "Continuously monitor critical power assets for early anomaly detection and predictive maintenance planning.",
-    image: "/indus/assetqual.png",
+    image: "/indus/energyasset.png",
   },
   {
     title: "Inventory Optimization",
