@@ -63,7 +63,7 @@ const useCases = [
     title: "Audience / Visitor Analytics",
     description:
       "Behavior and footfall analytics support queue management, anomaly detection, and visitor experience optimization.",
-    image: "/indus/visitor.png",
+    image: "/indus/visiter.png",
   },
   {
     title: "Energy Management",

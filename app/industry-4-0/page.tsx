@@ -1,6 +1,5 @@
 import { Camera, CheckCircle2, ShieldCheck, Target } from "lucide-react";
 import IndustryUseCaseCards from "@/app/components/IndustryUseCaseCards";
-import { INVENTORY_DATA } from "@/app/data/inventory";
 
 const pillars = [
   {
@@ -38,15 +37,6 @@ const metrics = [
 ];
 
 export default function Industry40Page() {
-  const categoryShowcase = INVENTORY_DATA.slice(0, 8).map((category) => {
-    const rawImage = category.items[0]?.imagePath || "";
-    const normalizedImage = rawImage.replace(/\\/g, "/");
-    return {
-      title: category.title,
-      image: normalizedImage.startsWith("/") ? normalizedImage : `/${normalizedImage}`,
-    };
-  });
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#f7f9fc] via-[#f5f8ff] to-[#eef3fb] text-slate-900">
       <div className="max-w-6xl mx-auto px-5 md:px-10 py-16 md:py-20">
@@ -72,27 +62,6 @@ export default function Industry40Page() {
             ))}
           </div>
         </header>
-
-        <section className="mt-10 rounded-3xl border border-[#dde6f5] bg-white p-6 md:p-8 shadow-[0_14px_36px_-30px_rgba(20,55,110,0.45)]">
-          <div className="flex items-end justify-between gap-4 mb-5">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Category Showcase</h2>
-              <p className="mt-1 text-slate-600 text-sm md:text-base">One representative product image from each category.</p>
-            </div>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
-            {categoryShowcase.map((item) => (
-              <article key={item.title} className="rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-sm hover:shadow-md transition-all">
-                <div className="h-36 md:h-40 bg-slate-100">
-                  <img src={item.image} alt={item.title} className="h-full w-full object-contain p-2" />
-                </div>
-                <div className="p-3 border-t border-slate-100">
-                  <p className="text-sm font-semibold text-slate-800 line-clamp-2">{item.title}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
 
         <section className="mt-12 rounded-3xl border border-[#dde6f5] bg-white p-8 md:p-12 shadow-[0_14px_36px_-30px_rgba(20,55,110,0.45)]">
           <h2 className="text-2xl md:text-3xl font-bold">How It Works</h2>

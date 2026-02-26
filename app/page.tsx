@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import InventoryContent from "@/components/InventoryContent";
-import HomeBanner from "./components/HomeBanner"; 
+import CategoryShowcase from "./components/CategoryShowcase";
 import { prisma } from "@/lib/prisma";
 import Image from "next/image";
 import Link from "next/link";
@@ -124,8 +124,9 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
       {/* Spacer for Header */}
       <div className="w-full h-[70px]"></div>
 
-      {/* --- Banner --- */}
-      <HomeBanner />
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
+        <CategoryShowcase />
+      </div>
 
       <Suspense
         fallback={
