@@ -6,13 +6,13 @@ const pillars = [
     title: "Quality Inspection",
     body: "Vision models detect dimensional errors, surface defects, and packaging issues during production instead of post-production.",
     icon: CheckCircle2,
-    image: "/industry/photos/quality-card.jpg",
+    image: "/indus/qualinspec.webp",
   },
   {
     title: "Safety Monitoring",
     body: "Real-time scene analysis checks PPE usage, restricted-zone access, and unsafe motion around active equipment.",
     icon: ShieldCheck,
-    image: "/industry/photos/safety-card.jpg",
+    image: "/indus/worksafe.jpeg",
   },
   {
     title: "Process Optimization",
@@ -43,8 +43,7 @@ export default function Industry40Page() {
         <header className="rounded-3xl border border-[#dce6f6] bg-gradient-to-br from-white to-[#f4f8ff] px-8 py-12 md:px-12 md:py-14 shadow-[0_18px_45px_-28px_rgba(0,65,150,0.25)]">
           <p className="text-xs tracking-[0.16em] uppercase font-bold text-[#00529b]">Industry 4.0</p>
           <h1 className="mt-4 text-3xl md:text-5xl font-extrabold leading-tight">
-            Computer Vision for
-            <span className="text-[#00529b]"> Smart Manufacturing</span>
+            AI in Manufacturing
           </h1>
           <p className="mt-6 max-w-3xl text-slate-600 leading-8 text-[15px] md:text-base">
             Industry 4.0 combines connected machines, real-time data, and AI-driven decisions. Computer vision plays a central role by
