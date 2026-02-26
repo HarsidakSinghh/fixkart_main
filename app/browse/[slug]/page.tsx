@@ -2,7 +2,6 @@ import React from "react";
 import { prisma } from "@/lib/prisma";
 import Image from "next/image";
 import Link from "next/link";
-import { auth } from "@clerk/nextjs/server"; 
 import { INVENTORY_DATA } from "@/app/data/inventory"; 
 import { getFinalCustomerPrice } from "@/lib/pricing";
 
@@ -14,78 +13,60 @@ export default async function BrowseSubCategoryPage({
   params: Promise<{ slug: string }> 
 }) {
   const { slug } = await params;
-  const { userId } = await auth();
 
   // --- SMART SEARCH LOGIC START ---
-  let searchTerm = "";
+  let categoryTerm = "";
+  let subCategoryTerm = "";
   let displayTitle = "";
   
   const normalize = (text: string) => text.toLowerCase().replace(/[^a-z0-9]/g, "");
+  const toSlug = (text: string) => text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
   const targetSlug = normalize(slug);
 
   const mainCategory = INVENTORY_DATA.find(c => normalize(c.slug) === targetSlug);
 
   if (mainCategory) {
-    searchTerm = mainCategory.title;
+    categoryTerm = mainCategory.title;
     displayTitle = mainCategory.title;
   } else {
     for (const cat of INVENTORY_DATA) {
       const itemMatch = cat.items.find(item => normalize(item.name) === targetSlug);
       if (itemMatch) {
-        searchTerm = cat.title;       
+        categoryTerm = cat.title;
+        subCategoryTerm = itemMatch.name;
         displayTitle = itemMatch.name; 
         break;
       }
     }
   }
 
-  if (!searchTerm) {
-    searchTerm = slug.replace(/-/g, ' ');
-    displayTitle = searchTerm;
+  if (!categoryTerm && !subCategoryTerm) {
+    subCategoryTerm = slug.replace(/-/g, " ");
+    displayTitle = subCategoryTerm;
   }
-  
-  // DEBUG 1: Check what we are searching for
- 
 
-  // 5. Fetch Products
-  // We temporarily REMOVED the status filter to see if the product exists at all
-  const rawProducts = await prisma.product.findMany({
+
+  // 5. Fetch Products (approved + published only)
+  const filteredProducts = await prisma.product.findMany({
     where: {
-      subCategory: {
-        contains: searchTerm, 
-        mode: 'insensitive' 
-      }
+      isPublished: true,
+      status: { equals: "APPROVED", mode: "insensitive" },
+      ...(subCategoryTerm
+        ? {
+            subCategory: {
+              contains: subCategoryTerm,
+              mode: "insensitive",
+            },
+          }
+        : {
+            OR: [
+              { category: { contains: categoryTerm, mode: "insensitive" } },
+              { category: { contains: toSlug(categoryTerm), mode: "insensitive" } },
+            ],
+          }),
     },
-    orderBy: { createdAt: 'desc' }
+    orderBy: { createdAt: "desc" },
   });
-
-  console.log(`🔍 DEBUG: Found ${rawProducts.length} total products in this category.`);
-
-  // 6. FILTERING
-  const filteredProducts = rawProducts.filter(product => {
-      // Check 1: Is it approved?
-      // We check for "approved" OR "Approved" to be safe
-      const isApproved = product.status && product.status.toLowerCase() === "approved";
-      
-      if (!isApproved) {
-        console.log(`❌ Skipped "${product.name}" - Status is "${product.status}" (Needs "approved")`);
-        return false;
-      }
-
-      // Check 2: Does it match the sub-item (if we are on a specific item page)?
-      if (displayTitle === searchTerm) return true; // On main page, show all
-
-      const matchesSubCategory = normalize(product.subSubCategory || "") === normalize(displayTitle);
-      
-      if (!matchesSubCategory) {
-        console.log(`❌ Skipped "${product.name}" - SubCategory mismatch. (Got: "${product.subSubCategory}", Wanted: "${displayTitle}")`);
-      }
-
-      return matchesSubCategory;
-  });
-
-  console.log(`✅ DEBUG: Final products showing: ${filteredProducts.length}`);
-  console.log("-------------------------------------------------");
 
   return (
     <div className="min-h-screen bg-gray-50 p-8">
