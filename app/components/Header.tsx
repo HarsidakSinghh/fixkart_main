@@ -7,7 +7,7 @@ import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@cl
 import { 
   LayoutGrid, 
   Wallet, 
-  MapPin, 
+  Factory, 
   Phone, 
   Mail, 
   MessageCircle, 
@@ -108,9 +108,9 @@ export default function Header() {
                   <span>Download Catalog</span>
                 </a>
 
-                <Link href="/find-branch" className="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-gray-100 hover:text-gray-900 transition-all group">
-                  <MapPin size={18} className="group-hover:text-[#00529b]" />
-                  <span>Find My Branch</span>
+                <Link href="/industry-4-0" className="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-gray-100 hover:text-gray-900 transition-all group">
+                  <Factory size={18} className="group-hover:text-[#00529b]" />
+                  <span>Industry 4.0</span>
                 </Link>
               </div>
 

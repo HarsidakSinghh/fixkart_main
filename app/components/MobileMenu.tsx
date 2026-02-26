@@ -94,6 +94,9 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
         {/* Footer */}
         <div className="p-4 border-t border-gray-100 bg-gray-50">
+           <a href="/industry-4-0" onClick={onClose} className="block text-center text-sm font-bold text-gray-700 py-2 hover:text-[#00529b] transition-colors">
+             Industry 4.0
+           </a>
            <a href="/orders" onClick={onClose} className="block text-center text-sm font-bold text-[#00529b] py-2">
              View My Orders
            </a>
