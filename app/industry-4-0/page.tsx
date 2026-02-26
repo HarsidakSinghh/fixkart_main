@@ -26,25 +26,43 @@ const outcomes = [
   "Higher OEE and throughput stability",
 ];
 
+const metrics = [
+  { label: "Inspection Accuracy", value: "99%+" },
+  { label: "Downtime Impact", value: "-25%" },
+  { label: "Defect Escapes", value: "-40%" },
+];
+
 export default function Industry40Page() {
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900">
-      <div className="max-w-5xl mx-auto px-5 md:px-8 py-12 md:py-16">
-        <header className="rounded-2xl border border-slate-200 bg-white px-7 py-10 md:px-10 md:py-12 shadow-sm">
-          <p className="text-xs tracking-[0.14em] uppercase font-bold text-[#00529b]">Industry 4.0</p>
-          <h1 className="mt-3 text-3xl md:text-5xl font-extrabold leading-tight">
+    <div className="min-h-screen bg-gradient-to-b from-[#f7f9fc] via-[#f5f8ff] to-[#eef3fb] text-slate-900">
+      <div className="max-w-6xl mx-auto px-5 md:px-10 py-16 md:py-20">
+        <header className="rounded-3xl border border-[#dce6f6] bg-gradient-to-br from-white to-[#f4f8ff] px-8 py-12 md:px-12 md:py-14 shadow-[0_18px_45px_-28px_rgba(0,65,150,0.25)]">
+          <p className="text-xs tracking-[0.16em] uppercase font-bold text-[#00529b]">Industry 4.0</p>
+          <h1 className="mt-4 text-3xl md:text-5xl font-extrabold leading-tight">
             Computer Vision for
             <span className="text-[#00529b]"> Smart Manufacturing</span>
           </h1>
-          <p className="mt-5 max-w-3xl text-slate-600 leading-8 text-[15px] md:text-base">
+          <p className="mt-6 max-w-3xl text-slate-600 leading-8 text-[15px] md:text-base">
             Industry 4.0 combines connected machines, real-time data, and AI-driven decisions. Computer vision plays a central role by
             turning visual production signals into immediate actions for quality, safety, and productivity.
           </p>
+
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {metrics.map((metric) => (
+              <div
+                key={metric.label}
+                className="rounded-2xl border border-[#d8e3f5] bg-white/90 px-5 py-4 backdrop-blur shadow-[0_8px_20px_-16px_rgba(0,65,150,0.35)]"
+              >
+                <p className="text-2xl font-extrabold text-[#00529b]">{metric.value}</p>
+                <p className="mt-1 text-xs uppercase tracking-[0.08em] text-slate-500">{metric.label}</p>
+              </div>
+            ))}
+          </div>
         </header>
 
-        <section className="mt-10 rounded-2xl border border-slate-200 bg-white p-7 md:p-10 shadow-sm">
+        <section className="mt-12 rounded-3xl border border-[#dde6f5] bg-white p-8 md:p-12 shadow-[0_14px_36px_-30px_rgba(20,55,110,0.45)]">
           <h2 className="text-2xl md:text-3xl font-bold">How It Works</h2>
-          <div className="mt-5 space-y-4 text-slate-600 leading-8 text-[15px] md:text-base">
+          <div className="mt-6 space-y-5 text-slate-600 leading-8 text-[15px] md:text-base">
             <p>
               Cameras and sensors capture continuous visual data from lines, workstations, and machine interfaces. AI models on edge
               devices analyze this stream in milliseconds to identify defects, non-compliance, and anomalies.
@@ -56,29 +74,32 @@ export default function Industry40Page() {
           </div>
         </section>
 
-        <section className="mt-10">
+        <section className="mt-12">
           <h2 className="text-2xl md:text-3xl font-bold">Core Applications</h2>
-          <div className="mt-5 grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-5">
             {pillars.map((item) => (
-              <article key={item.title} className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-                <div className="flex items-center gap-2 text-[#00529b]">
-                  <item.icon size={18} />
-                  <p className="font-bold">{item.title}</p>
+              <article
+                key={item.title}
+                className="rounded-2xl border border-[#dbe5f7] bg-gradient-to-br from-white to-[#f7faff] p-6 shadow-[0_16px_30px_-26px_rgba(0,65,150,0.6)] hover:shadow-[0_24px_38px_-26px_rgba(0,65,150,0.5)] hover:-translate-y-0.5 transition-all"
+              >
+                <div className="inline-flex items-center gap-2 rounded-full border border-[#cfe0ff] bg-[#eef4ff] px-3 py-1.5 text-[#00529b]">
+                  <item.icon size={16} />
+                  <p className="font-bold text-sm">{item.title}</p>
                 </div>
-                <p className="mt-3 text-sm text-slate-600 leading-7">{item.body}</p>
+                <p className="mt-4 text-sm text-slate-600 leading-7">{item.body}</p>
               </article>
             ))}
           </div>
         </section>
 
-        <section className="mt-10 rounded-2xl border border-slate-200 bg-white p-7 md:p-10 shadow-sm">
+        <section className="mt-12 rounded-3xl border border-[#dde6f5] bg-white p-8 md:p-12 shadow-[0_14px_36px_-30px_rgba(20,55,110,0.45)]">
           <div className="flex items-center gap-2 text-[#00529b]">
             <Camera size={18} />
             <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Business Outcomes</h2>
           </div>
-          <ul className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 text-slate-700">
+          <ul className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-slate-700">
             {outcomes.map((outcome) => (
-              <li key={outcome} className="border-b border-slate-100 pb-2">
+              <li key={outcome} className="rounded-lg border border-slate-100 bg-slate-50/70 px-4 py-3">
                 {outcome}
               </li>
             ))}
