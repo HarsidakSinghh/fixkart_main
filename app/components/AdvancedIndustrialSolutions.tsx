@@ -14,7 +14,7 @@ const solutions: Solution[] = [
   {
     key: "defect",
     title: "Automated Defect Inspection",
-    image: "/industry/defect-inspection.svg",
+    image: "/industry/photos/defect-inspection.jpg",
     summary: "AI-driven inspection that detects product and process defects early with consistent quality decisions.",
     useCases: [
       "Surface crack, dent, and coating detection",
@@ -25,7 +25,7 @@ const solutions: Solution[] = [
   {
     key: "llm",
     title: "LLMs for Industrial Data Management",
-    image: "/industry/llm-data-management.svg",
+    image: "/industry/photos/llm-data-management.jpg",
     summary: "Use domain-tuned LLMs to search, summarize, and operationalize complex plant data across teams.",
     useCases: [
       "SOP and maintenance manual Q&A assistant",
@@ -36,7 +36,7 @@ const solutions: Solution[] = [
   {
     key: "contactless",
     title: "Advanced Contactless Machine Monitoring",
-    image: "/industry/contactless-monitoring.svg",
+    image: "/industry/photos/contactless-monitoring.jpg",
     summary: "Remote machine health tracking using vision and sensor streams without physical contact instrumentation.",
     useCases: [
       "Thermal drift and motion anomaly alerts",
@@ -47,7 +47,7 @@ const solutions: Solution[] = [
   {
     key: "sustainable",
     title: "Sustainable Edge-AI Compute Solutions",
-    image: "/industry/sustainable-edge-ai.svg",
+    image: "/industry/photos/sustainable-edge-ai.jpg",
     summary: "Energy-efficient edge deployment for real-time AI in factories while controlling compute cost and carbon impact.",
     useCases: [
       "Low-power line-side inference architectures",
@@ -58,7 +58,7 @@ const solutions: Solution[] = [
   {
     key: "safety",
     title: "Industrial Safety & Security",
-    image: "/industry/safety-security.svg",
+    image: "/industry/photos/safety-security.jpg",
     summary: "Continuous monitoring for workforce safety, site compliance, and perimeter/zone security events.",
     useCases: [
       "PPE compliance and unsafe-behavior alerts",

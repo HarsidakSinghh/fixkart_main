@@ -16,7 +16,7 @@ const useCaseItems: UseCaseItem[] = [
     id: "predict-ai",
     title: "Predict.AI",
     subtitle: "Predictive Maintenance",
-    image: "/industry/contactless-monitoring.svg",
+    image: "/industry/photos/contactless-monitoring.jpg",
     summary: "Detect machine wear patterns early and prevent unplanned failures.",
     points: [
       "Identify abnormal vibration and thermal signatures.",
@@ -28,7 +28,7 @@ const useCaseItems: UseCaseItem[] = [
     id: "trust-ai",
     title: "Trust.AI",
     subtitle: "Quality Assurance",
-    image: "/industry/defect-inspection.svg",
+    image: "/industry/photos/defect-inspection.jpg",
     summary: "Vision-based inspection for defect detection and process consistency.",
     points: [
       "Surface defect and dimensional checks in real time.",
@@ -40,7 +40,7 @@ const useCaseItems: UseCaseItem[] = [
     id: "conserve-ai",
     title: "Conserve.AI",
     subtitle: "Energy Optimization",
-    image: "/industry/sustainable-edge-ai.svg",
+    image: "/industry/photos/sustainable-edge-ai.jpg",
     summary: "Optimize energy-intensive operations using visual and sensor intelligence.",
     points: [
       "Monitor equipment utilization against production output.",
@@ -52,7 +52,7 @@ const useCaseItems: UseCaseItem[] = [
     id: "track-ai",
     title: "Track.AI",
     subtitle: "Asset & Flow Visibility",
-    image: "/industry/llm-data-management.svg",
+    image: "/industry/photos/llm-data-management.jpg",
     summary: "Track assets, material movement, and logistics status across sites.",
     points: [
       "Locate critical tools, pallets, and inventory quickly.",
@@ -64,7 +64,7 @@ const useCaseItems: UseCaseItem[] = [
     id: "spot-ai",
     title: "Spot.AI",
     subtitle: "Safety & Compliance",
-    image: "/industry/safety-security.svg",
+    image: "/industry/photos/safety-security.jpg",
     summary: "Protect workers and enforce policy with real-time scene intelligence.",
     points: [
       "Detect PPE non-compliance in high-risk zones.",

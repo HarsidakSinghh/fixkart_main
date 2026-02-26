@@ -7,19 +7,19 @@ const pillars = [
     title: "Quality Inspection",
     body: "Vision models detect dimensional errors, surface defects, and packaging issues during production instead of post-production.",
     icon: CheckCircle2,
-    image: "/industry/defect-inspection.svg",
+    image: "/industry/photos/quality-card.jpg",
   },
   {
     title: "Safety Monitoring",
     body: "Real-time scene analysis checks PPE usage, restricted-zone access, and unsafe motion around active equipment.",
     icon: ShieldCheck,
-    image: "/industry/safety-security.svg",
+    image: "/industry/photos/safety-card.jpg",
   },
   {
     title: "Process Optimization",
     body: "Continuous visual tracking highlights bottlenecks, cycle-time drift, and line performance losses.",
     icon: Target,
-    image: "/industry/contactless-monitoring.svg",
+    image: "/industry/photos/process-card.jpg",
   },
 ];
 
@@ -68,7 +68,7 @@ export default function Industry40Page() {
         <section className="mt-10 overflow-hidden rounded-3xl border border-[#dde6f5] bg-white shadow-[0_14px_36px_-30px_rgba(20,55,110,0.45)]">
           <div className="relative h-52 md:h-72">
             <img
-              src="/industry/llm-data-management.svg"
+              src="/industry/photos/hero.jpg"
               alt="Industry 4.0 automation floor"
               className="h-full w-full object-cover"
             />
