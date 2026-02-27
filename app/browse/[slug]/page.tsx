@@ -1,6 +1,5 @@
 import React from "react";
 import { prisma } from "@/lib/prisma";
-import Image from "next/image";
 import Link from "next/link";
 import { INVENTORY_DATA } from "@/app/data/inventory"; 
 import { getFinalCustomerPrice } from "@/lib/pricing";
@@ -45,6 +44,14 @@ export default async function BrowseSubCategoryPage({
     subCategoryTerm = slug.replace(/-/g, " ");
     displayTitle = subCategoryTerm;
   }
+
+  const defaultTypeImage = (() => {
+    for (const category of INVENTORY_DATA) {
+      const matched = category.items.find((item) => normalize(item.name) === normalize(displayTitle));
+      if (matched?.imagePath) return normalizeImageSrc(matched.imagePath);
+    }
+    return "/fixkart-logo.png";
+  })();
 
 
   // 5. Fetch Products (approved + published only)
@@ -115,12 +122,19 @@ export default async function BrowseSubCategoryPage({
               <div key={product.id} className="bg-white rounded-xl shadow-sm border border-gray-100 p-3 hover:shadow-md transition-all relative group">
                 <Link href={`/product/${product.slug}`} className="block">
                   <div className="relative aspect-square mb-3 bg-gray-50 rounded-lg overflow-hidden">
-                    <Image 
-                      src={normalizeImageSrc(product.image)} 
-                      alt={product.name} 
-                      fill 
-                      className="object-contain p-2"
-                      unoptimized
+                    <img
+                      src={normalizeImageSrc(product.image)}
+                      alt={product.name}
+                      className="h-full w-full object-contain p-2"
+                      onError={(e) => {
+                        const target = e.currentTarget;
+                        if (target.src.includes(defaultTypeImage)) {
+                          target.onerror = null;
+                          target.src = "/fixkart-logo.png";
+                        } else {
+                          target.src = defaultTypeImage;
+                        }
+                      }}
                     />
                   </div>
                   <h3 className="font-semibold text-gray-800 text-sm line-clamp-2 leading-tight min-h-[2.5em]">

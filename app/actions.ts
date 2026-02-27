@@ -193,10 +193,10 @@ export async function getMergedInventoryData(): Promise<InventoryCategory[]> {
     where: {
       isPublished: true,
       status: { equals: "APPROVED", mode: "insensitive" },
-      subSubCategory: { not: "" },
     },
     select: {
       category: true,
+      subCategory: true,
       subSubCategory: true,
       image: true,
     },
@@ -208,18 +208,31 @@ export async function getMergedInventoryData(): Promise<InventoryCategory[]> {
     const targetCategory = categoryBySlug.get(categoryKey) || categoryByTitleSlug.get(categoryKey);
     if (!targetCategory) continue;
 
-    const newTypeName = (product.subSubCategory || "").trim();
-    if (!newTypeName) continue;
+    const typeCandidates = [
+      (product.subSubCategory || "").trim(),
+      (product.subCategory || "").trim(),
+    ]
+      .filter(Boolean)
+      .filter((val, idx, arr) => arr.findIndex((x) => x.toLowerCase() === val.toLowerCase()) === idx);
 
-    const alreadyExists = targetCategory.items.some(
-      (item) => item.name.trim().toLowerCase() === newTypeName.toLowerCase()
-    );
-    if (alreadyExists) continue;
+    if (typeCandidates.length === 0) continue;
 
-    targetCategory.items.push({
-      name: newTypeName,
-      imagePath: normalizeImageSrc(product.image),
-    });
+    for (const newTypeName of typeCandidates) {
+      const normalizedType = newTypeName.toLowerCase();
+      const categoryTitle = targetCategory.title.trim().toLowerCase();
+      const categorySlug = targetCategory.slug.trim().toLowerCase();
+      if (normalizedType === categoryTitle || normalizedType === categorySlug) continue;
+
+      const alreadyExists = targetCategory.items.some(
+        (item) => item.name.trim().toLowerCase() === normalizedType
+      );
+      if (alreadyExists) continue;
+
+      targetCategory.items.push({
+        name: newTypeName,
+        imagePath: normalizeImageSrc(product.image),
+      });
+    }
   }
 
   return merged;
