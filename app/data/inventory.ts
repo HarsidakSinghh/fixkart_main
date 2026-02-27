@@ -27,6 +27,10 @@ export const INVENTORY_DATA: Category[] = [
         categoryId: "Cat-001",
         quantity: undefined
       },
+      {
+        name: "Hex Bolts", imagePath: "/fastening\\bolts.webp",
+        quantity: undefined
+      },
       // {
       //   name: "Bolts", imagePath: "/fastening\\bolts.webp",
       //   quantity: undefined
@@ -160,10 +164,6 @@ export const INVENTORY_DATA: Category[] = [
         quantity: undefined
       },{
         name: "ButtonHead Screws", imagePath: "/fastening\\buttonhead.jpg",
-        quantity: undefined
-      },
-      {
-        name: "Hex Bolts", imagePath: "/fastening\\bolts.webp",
         quantity: undefined
       },
       {
