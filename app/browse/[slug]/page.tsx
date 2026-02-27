@@ -54,10 +54,32 @@ export default async function BrowseSubCategoryPage({
       status: { equals: "APPROVED", mode: "insensitive" },
       ...(subCategoryTerm
         ? {
-            subCategory: {
-              contains: subCategoryTerm,
-              mode: "insensitive",
-            },
+            OR: [
+              {
+                subCategory: {
+                  contains: subCategoryTerm,
+                  mode: "insensitive",
+                },
+              },
+              {
+                subSubCategory: {
+                  contains: subCategoryTerm,
+                  mode: "insensitive",
+                },
+              },
+              {
+                name: {
+                  contains: subCategoryTerm,
+                  mode: "insensitive",
+                },
+              },
+              {
+                title: {
+                  contains: subCategoryTerm,
+                  mode: "insensitive",
+                },
+              },
+            ],
           }
         : {
             OR: [
