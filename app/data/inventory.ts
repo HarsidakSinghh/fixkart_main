@@ -112,7 +112,11 @@ export const INVENTORY_DATA: Category[] = [
         quantity: undefined
       },
       {
-        name: "Drywall Screws", imagePath: "/fastening\\screws.jpg",
+        name: "Drywall Screws", imagePath: "/fastening\\drywall.jpg",
+        quantity: undefined
+      },
+      {
+        name: "Machine screw", imagePath: "/fastening\\screws.jpg",
         quantity: undefined
       },{
         name: "Torx Screws", imagePath: "/fastening\\stainless-steel-torx-screws-stainless-steel-torx-screws-isolated-white-background-215582969.webp",
