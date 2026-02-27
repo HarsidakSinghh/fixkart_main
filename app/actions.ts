@@ -164,6 +164,78 @@ type InventoryCategory = {
 const toSlugKey = (text: string) =>
   text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 
+const internetFallbackImage = (label: string) =>
+  `https://placehold.co/400x400/f3f4f6/00529b.png?text=${encodeURIComponent(label)}&font=roboto`;
+
+async function searchInternetImage(query: string): Promise<string | null> {
+  try {
+    // Wikimedia is stable for direct image URLs and does not require API keys.
+    const url =
+      "https://en.wikipedia.org/w/api.php" +
+      `?action=query&generator=search&gsrsearch=${encodeURIComponent(query)}` +
+      "&gsrlimit=1&prop=pageimages&piprop=thumbnail&pithumbsize=800&format=json&origin=*";
+
+    const response = await fetch(url, {
+      method: "GET",
+      cache: "force-cache",
+      next: { revalidate: 60 * 60 * 24 * 30 },
+    });
+    if (!response.ok) return null;
+
+    const payload = (await response.json()) as {
+      query?: { pages?: Record<string, { thumbnail?: { source?: string } }> };
+    };
+
+    const pages = payload.query?.pages;
+    if (!pages) return null;
+
+    for (const page of Object.values(pages)) {
+      const candidate = page.thumbnail?.source;
+      if (candidate && candidate.startsWith("http")) {
+        return candidate;
+      }
+    }
+  } catch {
+    // Keep UI responsive even if internet lookup fails.
+  }
+
+  return null;
+}
+
+async function resolveTypeImageWithCache(typeName: string, categoryName: string): Promise<string> {
+  const key = `${toSlugKey(categoryName)}:${toSlugKey(typeName)}`;
+
+  try {
+    const cached = await prisma.productTypeImageCache.findUnique({ where: { key } });
+    if (cached?.imageUrl) return cached.imageUrl;
+  } catch {
+    // Cache lookup failure should never block page rendering.
+  }
+
+  const searchQuery = `${typeName} industrial ${categoryName}`;
+  const foundImage = await searchInternetImage(searchQuery);
+  const resolved = foundImage || internetFallbackImage(typeName);
+
+  try {
+    await prisma.productTypeImageCache.upsert({
+      where: { key },
+      update: {
+        imageUrl: resolved,
+        source: foundImage ? "wikimedia" : "fallback",
+      },
+      create: {
+        key,
+        imageUrl: resolved,
+        source: foundImage ? "wikimedia" : "fallback",
+      },
+    });
+  } catch {
+    // No-op: still return resolved URL even if cache write fails.
+  }
+
+  return resolved;
+}
+
 function resolveDefaultTypeImage(category: string, subCategory: string): string {
   const categoryKey = toSlugKey(category || "");
   const subCategoryKey = (subCategory || "").trim().toLowerCase();
@@ -230,14 +302,14 @@ export async function getMergedInventoryData(): Promise<InventoryCategory[]> {
       if (alreadyExists) continue;
 
       const normalizedVendorImage = normalizeImageSrc(product.image || product.imagePath);
-      const fallbackInternetImage = `https://placehold.co/400x400/f3f4f6/00529b.png?text=${encodeURIComponent(newTypeName)}&font=roboto`;
+      const resolvedTypeImage =
+        normalizedVendorImage !== "/fixkart-logo.png"
+          ? normalizedVendorImage
+          : await resolveTypeImageWithCache(newTypeName, targetCategory.title);
 
       targetCategory.items.push({
         name: newTypeName,
-        imagePath:
-          normalizedVendorImage !== "/fixkart-logo.png"
-            ? normalizedVendorImage
-            : fallbackInternetImage,
+        imagePath: resolvedTypeImage,
       });
     }
   }
