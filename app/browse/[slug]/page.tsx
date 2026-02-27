@@ -119,8 +119,10 @@ export default async function BrowseSubCategoryPage({
             {filteredProducts.map((product) => {
               const finalPrice = getFinalCustomerPrice(product.price, product.specs as Record<string, unknown> | null);
               const normalizedProductImage = normalizeImageSrc(product.image || product.imagePath);
+              // On product-type listing pages, prioritize the type image so cards stay consistent
+              // even when vendor-uploaded product image paths are invalid/missing.
               const resolvedImage =
-                normalizedProductImage === "/fixkart-logo.png"
+                defaultTypeImage !== "/fixkart-logo.png"
                   ? defaultTypeImage
                   : normalizedProductImage;
               return (
