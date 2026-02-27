@@ -58,7 +58,7 @@ export default async function BrowseSubCategoryPage({
   const filteredProducts = await prisma.product.findMany({
     where: {
       isPublished: true,
-      status: { equals: "APPROVED", mode: "insensitive" },
+      status: { in: ["APPROVED", "Approved", "approved"] },
       ...(subCategoryTerm
         ? {
             OR: [
@@ -118,23 +118,19 @@ export default async function BrowseSubCategoryPage({
           <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-6">
             {filteredProducts.map((product) => {
               const finalPrice = getFinalCustomerPrice(product.price, product.specs as Record<string, unknown> | null);
+              const normalizedProductImage = normalizeImageSrc(product.image || product.imagePath);
+              const resolvedImage =
+                normalizedProductImage === "/fixkart-logo.png"
+                  ? defaultTypeImage
+                  : normalizedProductImage;
               return (
               <div key={product.id} className="bg-white rounded-xl shadow-sm border border-gray-100 p-3 hover:shadow-md transition-all relative group">
                 <Link href={`/product/${product.slug}`} className="block">
                   <div className="relative aspect-square mb-3 bg-gray-50 rounded-lg overflow-hidden">
                     <img
-                      src={normalizeImageSrc(product.image)}
+                      src={resolvedImage}
                       alt={product.name}
                       className="h-full w-full object-contain p-2"
-                      onError={(e) => {
-                        const target = e.currentTarget;
-                        if (target.src.includes(defaultTypeImage)) {
-                          target.onerror = null;
-                          target.src = "/fixkart-logo.png";
-                        } else {
-                          target.src = defaultTypeImage;
-                        }
-                      }}
                     />
                   </div>
                   <h3 className="font-semibold text-gray-800 text-sm line-clamp-2 leading-tight min-h-[2.5em]">

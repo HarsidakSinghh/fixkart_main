@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useAuth } from "@clerk/nextjs";
-import Image from "next/image";
 import Link from "next/link";
 import VendorModal from "@/components/VendorModal"; 
 import { INVENTORY_DATA, SIDEBAR_LINKS } from "@/app/data/inventory"; 
@@ -190,7 +189,12 @@ const ProductCard = React.memo(function ProductCard({ item }: { item: any }) {
   return (
     <div className="flex flex-col items-center group cursor-pointer w-full h-full bg-white rounded-lg p-2 transition-all hover:bg-white hover:shadow-lg relative">
       <div className="aspect-square w-full max-w-[120px] bg-white border border-gray-100 rounded-lg mb-3 flex items-center justify-center overflow-hidden relative shadow-sm">
-        <Image src={imgSrc} alt={item.name} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-contain p-2 group-hover:scale-105 transition-transform duration-300" unoptimized={true} onError={() => setImgSrc(fallbackUrl)} />
+        <img
+          src={imgSrc}
+          alt={item.name}
+          className="h-full w-full object-contain p-2 group-hover:scale-105 transition-transform duration-300"
+          onError={() => setImgSrc(fallbackUrl)}
+        />
       </div>
       <span className="text-[13px] text-center leading-snug font-medium px-1 line-clamp-2 text-gray-600 group-hover:text-[#00529b]">
         {item.name}

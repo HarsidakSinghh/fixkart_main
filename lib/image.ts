@@ -1,5 +1,6 @@
-export function normalizeImageSrc(src: string | null | undefined): string {
-  if (!src) return "/fixkart-logo.png";
+export function normalizeImageSrc(src: unknown): string {
+  if (typeof src !== "string") return "/fixkart-logo.png";
+  if (!src.trim()) return "/fixkart-logo.png";
 
   const normalized = src.trim().replace(/\\/g, "/");
   const lower = normalized.toLowerCase();

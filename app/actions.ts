@@ -192,13 +192,14 @@ export async function getMergedInventoryData(): Promise<InventoryCategory[]> {
   const products = await prisma.product.findMany({
     where: {
       isPublished: true,
-      status: { equals: "APPROVED", mode: "insensitive" },
+      status: { in: ["APPROVED", "Approved", "approved"] },
     },
     select: {
       category: true,
       subCategory: true,
       subSubCategory: true,
       image: true,
+      imagePath: true,
     },
     orderBy: { createdAt: "desc" },
   });
@@ -228,9 +229,15 @@ export async function getMergedInventoryData(): Promise<InventoryCategory[]> {
       );
       if (alreadyExists) continue;
 
+      const normalizedVendorImage = normalizeImageSrc(product.image || product.imagePath);
+      const fallbackInternetImage = `https://placehold.co/400x400/f3f4f6/00529b.png?text=${encodeURIComponent(newTypeName)}&font=roboto`;
+
       targetCategory.items.push({
         name: newTypeName,
-        imagePath: normalizeImageSrc(product.image),
+        imagePath:
+          normalizedVendorImage !== "/fixkart-logo.png"
+            ? normalizedVendorImage
+            : fallbackInternetImage,
       });
     }
   }
