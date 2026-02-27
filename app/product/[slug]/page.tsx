@@ -16,6 +16,7 @@ import {
 import ProductActions from "./../../components/ProductActions"; 
 import ProductImageGallery from "@/components/ProductImageGallery";
 import { getFinalCustomerPrice, stripCommissionSpecs } from "@/lib/pricing";
+import { normalizeImageSrc } from "@/lib/image";
 
 export const dynamic = "force-dynamic";
 
@@ -50,6 +51,8 @@ export default async function ProductDetailsPage({
   const fakeMrp = Math.round(finalPrice * 1.25);
   const discountPercent = fakeMrp > 0 ? Math.round(((fakeMrp - finalPrice) / fakeMrp) * 100) : 0;
   const productForCustomer = { ...product, price: finalPrice };
+  const normalizedMainImage = normalizeImageSrc(product.image);
+  const normalizedGallery = (product.gallery || []).map((img) => normalizeImageSrc(img));
 
   return (
     <div className="min-h-screen bg-white font-sans text-gray-800">
@@ -85,8 +88,8 @@ export default async function ProductDetailsPage({
           <div className="lg:col-span-5">
              <div className="sticky top-24">
                 <ProductImageGallery 
-                  mainImage={product.image} 
-                  gallery={product.gallery} 
+                  mainImage={normalizedMainImage} 
+                  gallery={normalizedGallery} 
                   title={product.title || product.name} 
                 />
              </div>

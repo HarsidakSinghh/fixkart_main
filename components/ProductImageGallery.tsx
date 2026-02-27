@@ -15,6 +15,7 @@ export default function ProductImageGallery({ mainImage, gallery, title }: Galle
   const allImages = Array.from(new Set([mainImage, ...(gallery || [])])).filter(Boolean);
   
   const [selectedImage, setSelectedImage] = useState(allImages[0]);
+  const fallbackImage = "/fixkart-logo.png";
 
   return (
     <div className="flex flex-col gap-4 w-full h-full">
@@ -22,11 +23,12 @@ export default function ProductImageGallery({ mainImage, gallery, title }: Galle
       {/* 1. Main Large Image */}
       <div className="relative w-full aspect-square bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden group">
         <Image 
-          src={selectedImage || "https://placehold.co/600?text=No+Image"}
+          src={selectedImage || fallbackImage}
           alt={title}
           fill
           className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
           unoptimized
+          onError={() => setSelectedImage(fallbackImage)}
         />
       </div>
 
@@ -49,6 +51,10 @@ export default function ProductImageGallery({ mainImage, gallery, title }: Galle
                 fill
                 className="object-contain p-1"
                 unoptimized
+                onError={(e) => {
+                  const target = e.currentTarget as HTMLImageElement;
+                  target.src = fallbackImage;
+                }}
               />
             </button>
           ))}

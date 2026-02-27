@@ -4,6 +4,8 @@ import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { auth } from "@clerk/nextjs/server";
 import { uploadToCloudinary } from "@/lib/cloudinary"; 
+import { normalizeImageSrc } from "@/lib/image";
+import { getPredefinedProductTypes } from "@/app/data/productTypes";
 
 // --- ADD PRODUCT ---
 export async function addProduct(formData: FormData) {
@@ -48,6 +50,8 @@ export async function addProduct(formData: FormData) {
     throw new Error("Missing required fields");
   }
 
+  const normalizedImagePath = normalizeImageSrc(finalImagePath);
+
   // 5. Save to Database with OWNER ID (vendorId)
   await prisma.product.create({
     data: {
@@ -59,8 +63,8 @@ export async function addProduct(formData: FormData) {
       category,
       subCategory,
       subSubCategory: subSubCategory || "", 
-      image: finalImagePath,      
-      imagePath: finalImagePath, 
+      image: normalizedImagePath,      
+      imagePath: normalizedImagePath, 
       price,
       quantity,
       sku: sku || undefined,
@@ -110,7 +114,10 @@ export async function getExistingSubSubCategories(subCategory: string) {
   if (!subCategory) return [];
   try {
     const results = await prisma.product.findMany({
-      where: { subCategory: subCategory, subSubCategory: { not: "" } },
+      where: {
+        subCategory: { equals: subCategory, mode: "insensitive" },
+        subSubCategory: { not: "" },
+      },
       select: { subSubCategory: true },
       distinct: ["subSubCategory"],
     });
@@ -118,4 +125,19 @@ export async function getExistingSubSubCategories(subCategory: string) {
   } catch (error) {
     return [];
   }
+}
+
+export async function getProductTypeSuggestions(subCategory: string) {
+  if (!subCategory) return [];
+
+  const predefined = getPredefinedProductTypes(subCategory);
+  const fromDb = await getExistingSubSubCategories(subCategory);
+
+  return Array.from(
+    new Set(
+      [...predefined, ...fromDb]
+        .map((val) => val.trim())
+        .filter(Boolean)
+    )
+  ).sort((a, b) => a.localeCompare(b));
 }

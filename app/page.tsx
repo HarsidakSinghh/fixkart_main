@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import Image from "next/image";
 import Link from "next/link";
 import { getFinalCustomerPrice } from "@/lib/pricing";
+import { normalizeImageSrc } from "@/lib/image";
 
 export const dynamic = "force-dynamic";
 
@@ -76,7 +77,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                 >
                   <div className="relative h-48 w-full bg-gray-50 border-b border-gray-100">
                     <Image
-                      src={product.image || "https://placehold.co/300?text=No+Image"}
+                      src={normalizeImageSrc(product.image)}
                       alt={product.name}
                       fill
                       className="object-contain p-4 group-hover:scale-105 transition-transform duration-300"

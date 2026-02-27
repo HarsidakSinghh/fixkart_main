@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react"; // Added useEffect
-import { addProduct } from "@/app/actions"; // Import addProduct action only
+import { addProduct, getProductTypeSuggestions } from "@/app/actions";
 import { INVENTORY_DATA } from "@/app/data/inventory";
 
 // REMOVE THIS LINE:
@@ -33,9 +33,13 @@ export default function VendorModal({
   useEffect(() => {
     async function fetchSuggestions() {
       if (selectedSubCategory) {
-        // Call Server Action
-        // TODO: Replace with actual API call or remove if not needed
-        setDynamicSuggestions([]); // No suggestions available
+        try {
+          const suggestions = await getProductTypeSuggestions(selectedSubCategory);
+          setDynamicSuggestions(suggestions);
+        } catch (error) {
+          console.error("Failed to load product type suggestions:", error);
+          setDynamicSuggestions([]);
+        }
       } else {
         setDynamicSuggestions([]);
       }
@@ -116,7 +120,7 @@ export default function VendorModal({
 
              {/* LEVEL 3: Sub-Sub-Category (DYNAMIC DB SUGGESTIONS) */}
              <div>
-                <label className="block text-xs font-bold uppercase text-gray-500 mb-1">3. Type / Variety (Dynamic)</label>
+                <label className="block text-xs font-bold uppercase text-gray-500 mb-1">3. Type / Variety</label>
                 
                 <input 
                    name="subSubCategory" 
@@ -136,7 +140,7 @@ export default function VendorModal({
                 
                 {dynamicSuggestions.length > 0 && (
                   <p className="text-[10px] text-green-600 mt-1 font-semibold">
-                    * Found {dynamicSuggestions.length} existing types in DB
+                    * Showing {dynamicSuggestions.length} predefined + vendor-added types
                   </p>
                 )}
              </div>

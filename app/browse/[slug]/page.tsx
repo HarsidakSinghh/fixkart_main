@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { INVENTORY_DATA } from "@/app/data/inventory"; 
 import { getFinalCustomerPrice } from "@/lib/pricing";
+import { normalizeImageSrc } from "@/lib/image";
 
 export const dynamic = "force-dynamic"; // Ensures we don't cache old data
 
@@ -93,7 +94,7 @@ export default async function BrowseSubCategoryPage({
                 <Link href={`/product/${product.slug}`} className="block">
                   <div className="relative aspect-square mb-3 bg-gray-50 rounded-lg overflow-hidden">
                     <Image 
-                      src={product.image || "https://placehold.co/400?text=No+Image"} 
+                      src={normalizeImageSrc(product.image)} 
                       alt={product.name} 
                       fill 
                       className="object-contain p-2"
