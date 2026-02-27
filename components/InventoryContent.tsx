@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import VendorModal from "@/components/VendorModal"; 
 import { INVENTORY_DATA, SIDEBAR_LINKS } from "@/app/data/inventory"; 
+import { getMergedInventoryData } from "@/app/actions";
 
 // --- CONFIGURATION ---
 const STICKY_HEADER_TOP = "140px";
@@ -26,6 +27,7 @@ export default function InventoryContent() {
   const [activeCategorySlug, setActiveCategorySlug] = useState<string>("");
   // Removed isMobileMenuOpen state
   const [isVendorModalOpen, setIsVendorModalOpen] = useState(false);
+  const [inventoryData, setInventoryData] = useState(INVENTORY_DATA);
 
   // 2. CLICK HANDLER
   const handlePostClick = () => {
@@ -36,18 +38,37 @@ export default function InventoryContent() {
     }
   };
 
-  // 3. FILTERING STATIC DATA
+  // 3. LOAD MERGED DATA (Predefined + Vendor Added from backend)
+  useEffect(() => {
+    let isMounted = true;
+
+    async function loadMergedInventory() {
+      try {
+        const merged = await getMergedInventoryData();
+        if (isMounted && merged?.length) setInventoryData(merged as typeof INVENTORY_DATA);
+      } catch (error) {
+        console.error("Failed to load merged inventory data:", error);
+      }
+    }
+
+    loadMergedInventory();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  // 4. FILTERING DATA
   const filteredData = useMemo(() => {
-    if (!searchQuery) return INVENTORY_DATA;
-    return INVENTORY_DATA.map((category) => {
+    if (!searchQuery) return inventoryData;
+    return inventoryData.map((category) => {
       const matchingItems = category.items.filter((item) =>
         item.name.toLowerCase().includes(searchQuery)
       );
       return { ...category, items: matchingItems };
     }).filter((category) => category.items.length > 0);
-  }, [searchQuery]);
+  }, [searchQuery, inventoryData]);
 
-  // 4. SCROLL SPY
+  // 5. SCROLL SPY
   useEffect(() => {
     const sections = document.querySelectorAll("section");
     const observer = new IntersectionObserver(
@@ -64,7 +85,7 @@ export default function InventoryContent() {
     return () => observer.disconnect();
   }, [filteredData]);
 
-  // 5. SMOOTH SCROLL HANDLER
+  // 6. SMOOTH SCROLL HANDLER
   const handleScroll = useCallback(
     (e: React.MouseEvent, id: string) => {
       e.preventDefault();

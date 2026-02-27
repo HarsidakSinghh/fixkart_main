@@ -6,6 +6,7 @@ import { auth } from "@clerk/nextjs/server";
 import { uploadToCloudinary } from "@/lib/cloudinary"; 
 import { normalizeImageSrc } from "@/lib/image";
 import { getPredefinedProductTypes } from "@/app/data/productTypes";
+import { INVENTORY_DATA } from "@/app/data/inventory";
 
 // --- ADD PRODUCT ---
 export async function addProduct(formData: FormData) {
@@ -48,6 +49,10 @@ export async function addProduct(formData: FormData) {
   // 4. Validate
   if (!name || !category || !subCategory || !price) {
     throw new Error("Missing required fields");
+  }
+
+  if (!finalImagePath) {
+    finalImagePath = resolveDefaultTypeImage(category, subCategory);
   }
 
   const normalizedImagePath = normalizeImageSrc(finalImagePath);
@@ -140,4 +145,82 @@ export async function getProductTypeSuggestions(subCategory: string) {
         .filter(Boolean)
     )
   ).sort((a, b) => a.localeCompare(b));
+}
+
+type InventoryItem = {
+  name: string;
+  imagePath: string;
+  categoryId?: string;
+  quantity?: number;
+};
+
+type InventoryCategory = {
+  title: string;
+  slug: string;
+  parentCategory?: string;
+  items: InventoryItem[];
+};
+
+const toSlugKey = (text: string) =>
+  text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+
+function resolveDefaultTypeImage(category: string, subCategory: string): string {
+  const categoryKey = toSlugKey(category || "");
+  const subCategoryKey = (subCategory || "").trim().toLowerCase();
+
+  const matchedCategory = INVENTORY_DATA.find(
+    (cat) => cat.slug === categoryKey || toSlugKey(cat.title) === categoryKey
+  );
+  if (!matchedCategory) return "";
+
+  const matchedItem = matchedCategory.items.find(
+    (item) => item.name.trim().toLowerCase() === subCategoryKey
+  );
+  return matchedItem?.imagePath || "";
+}
+
+// Returns predefined + vendor-added product types for customer home page.
+export async function getMergedInventoryData(): Promise<InventoryCategory[]> {
+  const merged: InventoryCategory[] = INVENTORY_DATA.map((category) => ({
+    ...category,
+    items: [...category.items],
+  }));
+
+  const categoryBySlug = new Map(merged.map((category) => [category.slug, category]));
+  const categoryByTitleSlug = new Map(merged.map((category) => [toSlugKey(category.title), category]));
+
+  const products = await prisma.product.findMany({
+    where: {
+      isPublished: true,
+      status: { equals: "APPROVED", mode: "insensitive" },
+      subSubCategory: { not: "" },
+    },
+    select: {
+      category: true,
+      subSubCategory: true,
+      image: true,
+    },
+    orderBy: { createdAt: "desc" },
+  });
+
+  for (const product of products) {
+    const categoryKey = toSlugKey(product.category || "");
+    const targetCategory = categoryBySlug.get(categoryKey) || categoryByTitleSlug.get(categoryKey);
+    if (!targetCategory) continue;
+
+    const newTypeName = (product.subSubCategory || "").trim();
+    if (!newTypeName) continue;
+
+    const alreadyExists = targetCategory.items.some(
+      (item) => item.name.trim().toLowerCase() === newTypeName.toLowerCase()
+    );
+    if (alreadyExists) continue;
+
+    targetCategory.items.push({
+      name: newTypeName,
+      imagePath: normalizeImageSrc(product.image),
+    });
+  }
+
+  return merged;
 }
