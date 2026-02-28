@@ -14,7 +14,7 @@ type HardwareItem = {
 const HARDWARE_ITEMS: HardwareItem[] = [
   {
     id: "s",
-    name: "CommandCore S",
+    name: "FIXKART EDGE",
     subtitle: "Agentic Edge AI",
     image: "/gpu/1.png",
     description:
@@ -35,7 +35,7 @@ const HARDWARE_ITEMS: HardwareItem[] = [
   },
   {
     id: "m",
-    name: "CommandCore M",
+    name: "FIXKART CORE",
     subtitle: "Desktop Private AI",
     image: "/gpu/2.png",
     description:
@@ -56,7 +56,7 @@ const HARDWARE_ITEMS: HardwareItem[] = [
   },
   {
     id: "xl",
-    name: "CommandCore XL",
+    name: "FIXKART TITAN",
     subtitle: "Datacenter-Grade Private Agentic AI",
     image: "/gpu/3.png",
     description:
@@ -80,27 +80,27 @@ const HARDWARE_ITEMS: HardwareItem[] = [
 function SpecIcon({ index }: { index: number }) {
   const icons = [Cpu, MemoryStick, HardDrive, Network, Gauge, Sparkles];
   const Icon = icons[index % icons.length];
-  return <Icon size={14} className="text-[#ff8b2c]" />;
+  return <Icon size={14} className="text-[#00529b]" />;
 }
 
 export default function IndustryHardwareShowcase() {
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top,#1a2b45_0%,#0f172a_45%,#0a0f1f_100%)] text-white">
+    <div className="min-h-screen bg-gradient-to-b from-white to-[#f3f8ff] text-[#133b72]">
       <div className="max-w-[1320px] mx-auto px-4 sm:px-5 md:px-8 py-8 md:py-16">
         <Link
           href="/industry-4-0"
-          className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white hover:bg-white/15 transition-colors"
+          className="inline-flex items-center gap-2 rounded-full border border-[#bfd6fb] bg-white px-4 py-2 text-sm font-semibold text-[#00529b] hover:bg-[#ecf4ff] transition-colors"
         >
           <ArrowLeft size={16} />
           Back to Overview
         </Link>
 
-        <header className="mt-4 rounded-3xl border border-white/15 bg-gradient-to-r from-[#0d162a]/95 to-[#1a2640]/90 p-5 sm:p-7 md:p-10 shadow-[0_25px_55px_-30px_rgba(0,0,0,0.7)]">
-          <p className="text-xs tracking-[0.2em] uppercase text-[#9fb4d8] font-semibold">Industry 4.0 Hardware</p>
-          <h1 className="mt-3 text-2xl sm:text-3xl md:text-5xl font-extrabold leading-tight">
+        <header className="mt-4 rounded-3xl border border-[#d7e7ff] bg-gradient-to-r from-white to-[#f1f7ff] p-5 sm:p-7 md:p-10 shadow-[0_25px_55px_-35px_rgba(0,65,150,0.35)]">
+          <p className="text-xs tracking-[0.2em] uppercase text-[#5f7eac] font-semibold">Industry 4.0 Hardware</p>
+          <h1 className="mt-3 text-2xl sm:text-3xl md:text-5xl font-extrabold leading-tight text-[#123b79]">
             Edge to Datacenter AI Systems
           </h1>
-          <p className="mt-3 max-w-4xl text-[#c8d4ea] leading-7 text-sm sm:text-base">
+          <p className="mt-3 max-w-4xl text-[#2f517e] leading-7 text-sm sm:text-base">
             Production-ready hardware stack for AI in manufacturing, from compact edge deployments to private datacenter-grade systems.
           </p>
         </header>
@@ -109,36 +109,36 @@ export default function IndustryHardwareShowcase() {
           {HARDWARE_ITEMS.map((item) => (
             <article
               key={item.id}
-              className="rounded-3xl border border-white/15 bg-gradient-to-b from-[#1a243b]/95 to-[#121a2f]/95 p-4 sm:p-5 md:p-6 shadow-[0_20px_36px_-26px_rgba(0,0,0,0.8)]"
+              className="rounded-3xl border border-[#d3e4ff] bg-gradient-to-b from-white to-[#f5f9ff] p-4 sm:p-5 md:p-6 shadow-[0_20px_36px_-30px_rgba(0,65,150,0.4)]"
             >
-              <div className="h-44 sm:h-52 rounded-2xl overflow-hidden border border-white/10 bg-[#0f172a]">
+              <div className="h-44 sm:h-52 rounded-2xl overflow-hidden border border-[#ccdeff] bg-[#f3f8ff]">
                 <img src={item.image} alt={item.name} className="h-full w-full object-contain p-3" />
               </div>
 
-              <h2 className="mt-4 text-xl sm:text-2xl font-bold">{item.name}</h2>
-              <p className="text-[#ff9f53] font-semibold text-sm sm:text-base">{item.subtitle}</p>
-              <p className="mt-2.5 text-[#d4dded] text-sm leading-6">{item.description}</p>
+              <h2 className="mt-4 text-xl sm:text-2xl font-bold text-[#123b79]">{item.name}</h2>
+              <p className="text-[#00529b] font-semibold text-sm sm:text-base">{item.subtitle}</p>
+              <p className="mt-2.5 text-[#31537f] text-sm leading-6">{item.description}</p>
 
-              <div className="mt-4 rounded-2xl border border-white/10 bg-white/5 p-3.5 sm:p-4">
-                <p className="text-xs uppercase tracking-[0.12em] text-[#aab8d3] font-semibold">Typical Use Cases</p>
-                <ul className="mt-2.5 space-y-2 text-sm text-[#dbe4f5]">
+              <div className="mt-4 rounded-2xl border border-[#d8e7ff] bg-[#f2f8ff] p-3.5 sm:p-4">
+                <p className="text-xs uppercase tracking-[0.12em] text-[#5f7eac] font-semibold">Typical Use Cases</p>
+                <ul className="mt-2.5 space-y-2 text-sm text-[#224a85]">
                   {item.useCases.map((line) => (
                     <li key={line} className="flex items-start gap-2">
-                      <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#ff8b2c] shrink-0" />
+                      <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#00529b] shrink-0" />
                       <span>{line}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="mt-3.5 rounded-2xl border border-white/10 bg-[#0b1325]/80 p-3.5 sm:p-4">
-                <p className="text-xs uppercase tracking-[0.12em] text-[#aab8d3] font-semibold">Specifications</p>
+              <div className="mt-3.5 rounded-2xl border border-[#d8e7ff] bg-[#f2f8ff] p-3.5 sm:p-4">
+                <p className="text-xs uppercase tracking-[0.12em] text-[#5f7eac] font-semibold">Specifications</p>
                 <ul className="mt-2.5 space-y-2">
                   {item.specs.map((spec, index) => (
                     <li key={spec.label} className="flex items-start gap-2 text-sm">
                       <SpecIcon index={index} />
-                      <p className="text-[#dbe4f5] leading-6">
-                        <span className="font-semibold text-white">{spec.label}: </span>
+                      <p className="text-[#224a85] leading-6">
+                        <span className="font-semibold text-[#123b79]">{spec.label}: </span>
                         {spec.value}
                       </p>
                     </li>
