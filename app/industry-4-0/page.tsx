@@ -1,5 +1,6 @@
 import { Camera, CheckCircle2, ShieldCheck, Target } from "lucide-react";
 import IndustryUseCaseCards from "@/app/components/IndustryUseCaseCards";
+import IndustryHardwareSection from "@/app/components/IndustryHardwareSection";
 
 const pillars = [
   {
@@ -77,6 +78,8 @@ export default function Industry40Page() {
             ))}
           </div>
         </header>
+
+        <IndustryHardwareSection />
 
         <section className="mt-12 rounded-3xl border border-[#dde6f5] bg-white p-8 md:p-12 shadow-[0_14px_36px_-30px_rgba(20,55,110,0.45)]">
           <h2 className="text-2xl md:text-3xl font-bold">How It Works</h2>
