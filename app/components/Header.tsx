@@ -26,6 +26,7 @@ export default function Header() {
   const pathname = usePathname(); 
   const router = useRouter();
   const industryDropdownRef = useRef<HTMLDivElement | null>(null);
+  const industryMobilePanelRef = useRef<HTMLDivElement | null>(null);
   
   const showHamburger = pathname === "/"; 
   const isIndustryPage = pathname?.startsWith("/industry-4-0");
@@ -41,8 +42,11 @@ export default function Header() {
 
   useEffect(() => {
     function handleOutsideClick(event: MouseEvent) {
-      if (!industryDropdownRef.current) return;
-      if (!industryDropdownRef.current.contains(event.target as Node)) {
+      const target = event.target as Node;
+      const clickedDropdownTrigger = industryDropdownRef.current?.contains(target);
+      const clickedMobilePanel = industryMobilePanelRef.current?.contains(target);
+
+      if (!clickedDropdownTrigger && !clickedMobilePanel) {
         setIsIndustryDropdownOpen(false);
       }
     }
@@ -224,7 +228,7 @@ export default function Header() {
         </div>
 
         {isIndustryPage && isIndustryDropdownOpen && (
-          <div className="md:hidden border-b border-gray-200 bg-white shadow-sm">
+          <div ref={industryMobilePanelRef} className="md:hidden border-b border-gray-200 bg-white shadow-sm">
             <div className="max-w-[1400px] mx-auto px-4 py-2 space-y-1">
               <Link
                 href="/industry-4-0"
