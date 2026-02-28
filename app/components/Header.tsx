@@ -133,7 +133,7 @@ export default function Header() {
                     <button
                       type="button"
                       onClick={() => setIsIndustryDropdownOpen((prev) => !prev)}
-                      className="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-gray-100 hover:text-gray-900 transition-all cursor-pointer"
+                      className="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-gray-100 hover:text-gray-900 transition-all cursor-pointer touch-manipulation"
                     >
                       <Factory size={18} className="group-hover:text-[#00529b]" />
                       <span>Industry 4.0</span>
@@ -141,7 +141,7 @@ export default function Header() {
                     </button>
 
                     <div
-                      className={`absolute top-full left-0 mt-1 w-52 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden z-50 ${
+                      className={`hidden md:block absolute top-full left-0 mt-1 w-52 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden z-50 ${
                         isIndustryDropdownOpen ? "block" : "hidden"
                       } md:group-hover:block`}
                     >
@@ -216,6 +216,27 @@ export default function Header() {
             </div>
           </div>
         </div>
+
+        {isIndustryPage && isIndustryDropdownOpen && (
+          <div className="md:hidden border-b border-gray-200 bg-white shadow-sm">
+            <div className="max-w-[1400px] mx-auto px-4 py-2 space-y-1">
+              <Link
+                href="/industry-4-0"
+                onClick={() => setIsIndustryDropdownOpen(false)}
+                className="block rounded-lg px-3 py-2 text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-[#00529b] transition-colors"
+              >
+                Overview
+              </Link>
+              <Link
+                href="/industry-4-0?view=hardware"
+                onClick={() => setIsIndustryDropdownOpen(false)}
+                className="block rounded-lg px-3 py-2 text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-[#00529b] transition-colors"
+              >
+                Explore Hardware
+              </Link>
+            </div>
+          </div>
+        )}
       </header>
 
       <MobileMenu 
