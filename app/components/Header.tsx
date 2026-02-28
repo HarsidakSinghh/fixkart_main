@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation"; 
+import { usePathname, useRouter } from "next/navigation"; 
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 import { 
   LayoutGrid, 
@@ -24,10 +24,16 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isIndustryDropdownOpen, setIsIndustryDropdownOpen] = useState(false);
   const pathname = usePathname(); 
+  const router = useRouter();
   const industryDropdownRef = useRef<HTMLDivElement | null>(null);
   
   const showHamburger = pathname === "/"; 
   const isIndustryPage = pathname?.startsWith("/industry-4-0");
+
+  const navigateIndustryView = (target: "overview" | "hardware") => {
+    setIsIndustryDropdownOpen(false);
+    router.push(target === "hardware" ? "/industry-4-0?view=hardware" : "/industry-4-0");
+  };
 
   useEffect(() => {
     setIsIndustryDropdownOpen(false);
@@ -227,13 +233,13 @@ export default function Header() {
               >
                 Overview
               </Link>
-              <Link
-                href="/industry-4-0?view=hardware"
-                onClick={() => setIsIndustryDropdownOpen(false)}
-                className="block rounded-lg px-3 py-2 text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-[#00529b] transition-colors"
+              <button
+                type="button"
+                onClick={() => navigateIndustryView("hardware")}
+                className="block w-full text-left rounded-lg px-3 py-2 text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-[#00529b] transition-colors"
               >
                 Explore Hardware
-              </Link>
+              </button>
             </div>
           </div>
         )}
