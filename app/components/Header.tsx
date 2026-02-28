@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation"; 
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
@@ -22,10 +22,28 @@ import MobileMenu from "./MobileMenu";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isIndustryDropdownOpen, setIsIndustryDropdownOpen] = useState(false);
   const pathname = usePathname(); 
+  const industryDropdownRef = useRef<HTMLDivElement | null>(null);
   
   const showHamburger = pathname === "/"; 
   const isIndustryPage = pathname?.startsWith("/industry-4-0");
+
+  useEffect(() => {
+    setIsIndustryDropdownOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    function handleOutsideClick(event: MouseEvent) {
+      if (!industryDropdownRef.current) return;
+      if (!industryDropdownRef.current.contains(event.target as Node)) {
+        setIsIndustryDropdownOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => document.removeEventListener("mousedown", handleOutsideClick);
+  }, []);
 
   // --- CONTACT CONFIGURATION ---
   const WHATSAPP_NUMBER = "918699466669"; // Your Number
@@ -95,7 +113,7 @@ export default function Header() {
         {/* ROW 2: WHITE SUB-NAVBAR */}
         <div className="w-full bg-white border-b border-gray-200 shadow-sm relative z-40">
           <div className="max-w-[1400px] mx-auto px-4 md:px-6">
-            <div className="flex items-center justify-between py-2 overflow-x-auto overflow-y-hidden md:overflow-visible scrollbar-hide touch-pan-x">
+            <div className="flex items-center justify-between py-2 overflow-x-auto overflow-y-visible md:overflow-visible scrollbar-hide touch-pan-x">
               
               <div className="flex items-center gap-2 md:gap-4 text-sm font-bold text-gray-600 whitespace-nowrap pr-4 md:pr-0">
                 
@@ -111,22 +129,32 @@ export default function Header() {
                 </a>
 
                 {isIndustryPage ? (
-                  <div className="relative group">
-                    <button className="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-gray-100 hover:text-gray-900 transition-all cursor-pointer">
+                  <div ref={industryDropdownRef} className="relative group">
+                    <button
+                      type="button"
+                      onClick={() => setIsIndustryDropdownOpen((prev) => !prev)}
+                      className="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-gray-100 hover:text-gray-900 transition-all cursor-pointer"
+                    >
                       <Factory size={18} className="group-hover:text-[#00529b]" />
                       <span>Industry 4.0</span>
                       <ChevronDown size={16} className="text-gray-500 group-hover:text-[#00529b]" />
                     </button>
 
-                    <div className="absolute top-full left-0 mt-1 w-52 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden hidden group-hover:block z-50">
+                    <div
+                      className={`absolute top-full left-0 mt-1 w-52 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden z-50 ${
+                        isIndustryDropdownOpen ? "block" : "hidden"
+                      } md:group-hover:block`}
+                    >
                       <Link
                         href="/industry-4-0"
+                        onClick={() => setIsIndustryDropdownOpen(false)}
                         className="block px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-[#00529b] transition-colors border-b border-gray-50"
                       >
                         Overview
                       </Link>
                       <Link
                         href="/industry-4-0?view=hardware"
+                        onClick={() => setIsIndustryDropdownOpen(false)}
                         className="block px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-[#00529b] transition-colors"
                       >
                         Explore Hardware
