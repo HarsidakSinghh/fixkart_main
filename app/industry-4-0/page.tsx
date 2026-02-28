@@ -1,6 +1,6 @@
 import { Camera, CheckCircle2, ShieldCheck, Target } from "lucide-react";
 import IndustryUseCaseCards from "@/app/components/IndustryUseCaseCards";
-import IndustryHardwareSection from "@/app/components/IndustryHardwareSection";
+import IndustryHardwareShowcase from "@/app/components/IndustryHardwareShowcase";
 
 const pillars = [
   {
@@ -52,7 +52,18 @@ const metrics = [
   { label: "Defect Escapes", value: "-40%" },
 ];
 
-export default function Industry40Page() {
+export default async function Industry40Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ view?: string }>;
+}) {
+  const { view } = await searchParams;
+  const isHardwareView = view === "hardware";
+
+  if (isHardwareView) {
+    return <IndustryHardwareShowcase />;
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#f7f9fc] via-[#f5f8ff] to-[#eef3fb] text-slate-900">
       <div className="max-w-6xl mx-auto px-5 md:px-10 py-16 md:py-20">
@@ -78,8 +89,6 @@ export default function Industry40Page() {
             ))}
           </div>
         </header>
-
-        <IndustryHardwareSection />
 
         <section className="mt-12 rounded-3xl border border-[#dde6f5] bg-white p-8 md:p-12 shadow-[0_14px_36px_-30px_rgba(20,55,110,0.45)]">
           <h2 className="text-2xl md:text-3xl font-bold">How It Works</h2>

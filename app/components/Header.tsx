@@ -8,6 +8,7 @@ import {
   LayoutGrid, 
   Wallet, 
   Factory, 
+  ChevronDown,
   Phone, 
   Mail, 
   MessageCircle, 
@@ -24,6 +25,7 @@ export default function Header() {
   const pathname = usePathname(); 
   
   const showHamburger = pathname === "/"; 
+  const isIndustryPage = pathname?.startsWith("/industry-4-0");
 
   // --- CONTACT CONFIGURATION ---
   const WHATSAPP_NUMBER = "918699466669"; // Your Number
@@ -108,10 +110,35 @@ export default function Header() {
                   <span>Download Catalog</span>
                 </a>
 
-                <Link href="/industry-4-0" className="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-gray-100 hover:text-gray-900 transition-all group">
-                  <Factory size={18} className="group-hover:text-[#00529b]" />
-                  <span>Industry 4.0</span>
-                </Link>
+                {isIndustryPage ? (
+                  <div className="relative group">
+                    <button className="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-gray-100 hover:text-gray-900 transition-all cursor-pointer">
+                      <Factory size={18} className="group-hover:text-[#00529b]" />
+                      <span>Industry 4.0</span>
+                      <ChevronDown size={16} className="text-gray-500 group-hover:text-[#00529b]" />
+                    </button>
+
+                    <div className="absolute top-full left-0 mt-1 w-52 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden hidden group-hover:block z-50">
+                      <Link
+                        href="/industry-4-0"
+                        className="block px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-[#00529b] transition-colors border-b border-gray-50"
+                      >
+                        Overview
+                      </Link>
+                      <Link
+                        href="/industry-4-0?view=hardware"
+                        className="block px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-[#00529b] transition-colors"
+                      >
+                        Explore Hardware
+                      </Link>
+                    </div>
+                  </div>
+                ) : (
+                  <Link href="/industry-4-0" className="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-gray-100 hover:text-gray-900 transition-all group">
+                    <Factory size={18} className="group-hover:text-[#00529b]" />
+                    <span>Industry 4.0</span>
+                  </Link>
+                )}
               </div>
 
               <div className="flex items-center gap-2 md:gap-4 text-sm font-bold text-gray-600 whitespace-nowrap ml-auto">
