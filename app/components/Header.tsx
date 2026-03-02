@@ -13,7 +13,8 @@ import {
   Mail, 
   MessageCircle, 
   ShoppingBag,
-  Menu 
+  Menu,
+  Brain
 } from "lucide-react";
 
 import SearchBar from "./Searchbar";
@@ -145,7 +146,7 @@ export default function Header() {
                     <span>Industry 4.0</span>
                   </Link>
                   <Link href="/industry-4-0?view=hardware" className="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-gray-100 hover:text-gray-900 transition-all group">
-                    <Factory size={18} className="group-hover:text-[#00529b]" />
+                    <Brain size={18} className="group-hover:text-[#00529b]" />
                     <span>Fixkore</span>
                   </Link>
                 </div>
