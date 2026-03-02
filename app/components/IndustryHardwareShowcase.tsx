@@ -97,6 +97,13 @@ export default function IndustryHardwareShowcase() {
             Production-ready hardware stack for AI in manufacturing, from compact edge deployments to private datacenter-grade systems.
           </p>
         </header>
+        <header className="mt-4 rounded-3xl border border-[#d7e7ff] bg-gradient-to-r from-white to-[#f1f7ff] p-5 sm:p-7 md:p-10 shadow-[0_25px_55px_-35px_rgba(0,65,150,0.35)]">
+          <p className="text-xs tracking-[0.2em] uppercase text-[#5f7eac] font-semibold">FixLogic : The Intelligence Core Behind Our AI Systems</p>
+          
+          <p className="mt-3 max-w-4xl text-[#2f517e] leading-7 text-sm sm:text-base">
+          FixLogic is our proprietary Large Language Model, built to transform operational data into meaningful business insights. It powers smarter inventory control, improved workforce efficiency, higher quality standards, and predictive asset reliability. Securely deployed from edge to datacenter, FixLogic delivers scalable AI designed for enterprise grade stability and long term operational excellence.
+          </p>
+        </header>
 
         <section className="mt-6 md:mt-10 grid grid-cols-1 xl:grid-cols-3 gap-4 md:gap-6">
           {HARDWARE_ITEMS.map((item) => (
