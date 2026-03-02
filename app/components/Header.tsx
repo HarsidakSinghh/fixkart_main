@@ -146,7 +146,7 @@ export default function Header() {
                     <span>Industry 4.0</span>
                   </Link>
                   <Link href="/industry-4-0?view=hardware" className="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-gray-100 hover:text-gray-900 transition-all group">
-                    <img src="/gpu/fixkore.png" alt="Fixkore" className="h-5 w-5 object-contain" />
+                    <img src="/gpu/fixkore.png" alt="Fixkore" className="h-6 w-6 object-contain" />
                     <span>Fixkore</span>
                   </Link>
                 </div>
