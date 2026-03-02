@@ -89,7 +89,7 @@ export default function IndustryHardwareShowcase() {
     <div className="min-h-screen bg-gradient-to-b from-white to-[#f3f8ff] text-[#133b72]">
       <div className="max-w-[1320px] mx-auto px-4 sm:px-5 md:px-8 py-8 md:py-16">
         <header className="mt-4 rounded-3xl border border-[#d7e7ff] bg-gradient-to-r from-white to-[#f1f7ff] p-5 sm:p-7 md:p-10 shadow-[0_25px_55px_-35px_rgba(0,65,150,0.35)]">
-        <h2 className="mt-4 text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight text-[#123b79]">
+        <h2 className="mt-4 text-2xl sm:text-5xl md:text-6xl font-extrabold leading-tight text-[#123b79]">
     Fixkore
     <span className="block text-lg sm:text-xl md:text-2xl font-semibold text-[#3b66a8] mt-1">
     Edge to Datacenter AI Systems
