@@ -41,10 +41,11 @@ const HARDWARE_ITEMS: HardwareItem[] = [
     description:
       "Desktop-scale AI platform powered by NVIDIA Grace-Blackwell Superchip GB10 for secure enterprise workloads.",
     useCases: [
-      "Department-level analytics",
-      "Local LLM inference and fine-tuning",
-      "R&D and simulation without cloud dependency",
-      "Batch processing for audio/video/sentiment pipelines",
+      "Run & Fine-Tune Large Language Models Locally ",
+      "Enable Secure AI Research & Development ",
+      "Accelerate Department Level Intelligence & Analytics ",
+      "Orchestrate Multi-Agent AI Workflows ",
+      "Perform High-Performance Multimodal Data Processing ",
     ],
     specs: [
       { label: "Architecture", value: "NVIDIA Grace-Blackwell (GB10) Superchip" },
@@ -103,7 +104,7 @@ export default function IndustryHardwareShowcase() {
               key={item.id}
               className="rounded-3xl border border-[#d3e4ff] bg-gradient-to-b from-white to-[#f5f9ff] p-4 sm:p-5 md:p-6 shadow-[0_20px_36px_-30px_rgba(0,65,150,0.4)]"
             >
-              <div className="h-44 sm:h-52 rounded-2xl overflow-hidden border border-[#ccdeff] bg-[#f3f8ff]">
+              <div className="h-44 sm:h-52 rounded-2xl overflow-hidden border border-[#ccdeff] bg-white">
                 <img src={item.image} alt={item.name} className="h-full w-full object-contain p-3" />
               </div>
 
@@ -112,7 +113,7 @@ export default function IndustryHardwareShowcase() {
               <p className="mt-2.5 text-[#31537f] text-sm leading-6">{item.description}</p>
 
               <div className="mt-4 rounded-2xl border border-[#d8e7ff] bg-[#f2f8ff] p-3.5 sm:p-4">
-                <p className="text-xs uppercase tracking-[0.12em] text-[#5f7eac] font-semibold">Typical Use Cases</p>
+                <p className="text-xs uppercase tracking-[0.12em] text-[#5f7eac] font-semibold">Designed To :</p>
                 <ul className="mt-2.5 space-y-2 text-sm text-[#224a85]">
                   {item.useCases.map((line) => (
                     <li key={line} className="flex items-start gap-2">
