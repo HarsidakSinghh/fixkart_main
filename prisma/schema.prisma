@@ -205,7 +205,7 @@ model CustomerProfile {
 // ==========================================
 
 model Order {
-  id            String      @id @default(cuid()) @map("_id")
+  id            String      @id @default(auto()) @map("_id") @db.ObjectId
   customerId    String      // Clerk User ID of customer
   customerName  String?     
   customerEmail String?     
@@ -228,10 +228,10 @@ model Order {
 }
 
 model OrderItem {
-  id            String   @id @default(cuid()) @map("_id")
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
   
   // Link to Order
-  orderId       String
+  orderId       String   @db.ObjectId
   order         Order    @relation(fields: [orderId], references: [id])
   
   // Link to Product
@@ -262,10 +262,10 @@ model OrderItem {
 // ==========================================
 
 model RefundRequest {
-  id          String    @id @default(cuid()) @map("_id")
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
   
   // Link to Item
-  orderItemId String    @unique
+  orderItemId String    @unique @db.ObjectId
   item        OrderItem @relation(fields: [orderItemId], references: [id])
 
   vendorId    String
@@ -277,10 +277,10 @@ model RefundRequest {
 }
 
 model Complaint {
-  id          String   @id @default(cuid()) @map("_id")
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
   
   // Link to Order
-  orderId     String
+  orderId     String   @db.ObjectId
   order       Order    @relation(fields: [orderId], references: [id])
 
   vendorId    String?  // Made optional in case it's a general order complaint
