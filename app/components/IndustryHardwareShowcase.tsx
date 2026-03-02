@@ -14,7 +14,7 @@ type HardwareItem = {
 const HARDWARE_ITEMS: HardwareItem[] = [
   {
     id: "s",
-    name: "FIXKART EDGE",
+    name: "FIXCOMMAND X1",
     subtitle: "Agentic Edge AI",
     image: "/gpu/1.png",
     description:
@@ -35,9 +35,9 @@ const HARDWARE_ITEMS: HardwareItem[] = [
   },
   {
     id: "m",
-    name: "FIXKART CORE",
+    name: "FIXCOMMAND X2",
     subtitle: "Desktop Private AI",
-    image: "/gpu/2.png",
+    image: "/gpu/1.png",
     description:
       "Desktop-scale AI platform powered by NVIDIA Grace-Blackwell Superchip GB10 for secure enterprise workloads.",
     useCases: [
@@ -56,9 +56,9 @@ const HARDWARE_ITEMS: HardwareItem[] = [
   },
   {
     id: "xl",
-    name: "FIXKART TITAN",
+    name: "FIXCOMMAND X3",
     subtitle: "Datacenter-Grade Private Agentic AI",
-    image: "/gpu/3.png",
+    image: "/gpu/2.png",
     description:
       "High-performance on-prem AI infrastructure for large-model inference, orchestration, governance, and mission-critical operations.",
     useCases: [
