@@ -97,15 +97,30 @@ export default function IndustryHardwareShowcase() {
             Production-ready hardware stack for AI in manufacturing, from compact edge deployments to private datacenter-grade systems.
           </p>
         </header>
-        <header className="mt-4 rounded-3xl border border-[#d7e7ff] bg-gradient-to-r from-white to-[#f1f7ff] p-5 sm:p-7 md:p-10 shadow-[0_25px_55px_-35px_rgba(0,65,150,0.35)]">
-          
-          <h1 className="mt-3 text-2xl sm:text-3xl md:text-5xl font-extrabold leading-tight text-[#123b79]">
-          FixLogic : The Intelligence Core Behind Our AI Systems
-          </h1>
-          <p className="mt-3 max-w-4xl text-[#2f517e] leading-7 text-sm sm:text-base">
-          FixLogic is our proprietary Large Language Model, built to transform operational data into meaningful business insights. It powers smarter inventory control, improved workforce efficiency, higher quality standards, and predictive asset reliability. Securely deployed from edge to datacenter, FixLogic delivers scalable AI designed for enterprise grade stability and long term operational excellence.
-          </p>
-        </header>
+        <header className="relative mt-8 overflow-hidden rounded-3xl border border-[#d7e7ff] bg-white p-6 sm:p-8 md:p-10 shadow-[0_30px_70px_-30px_rgba(0,65,150,0.35)]">
+  {/* subtle glow */}
+  <div className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-[#dbe9ff] blur-3xl opacity-50" />
+
+  {/* badge */}
+  <span className="inline-flex items-center rounded-full bg-[#eaf2ff] px-3 py-1 text-xs font-semibold text-[#3b66a8] ring-1 ring-[#d7e7ff]">
+    Core AI Platform
+  </span>
+
+  <h2 className="mt-4 text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight text-[#123b79]">
+    FixLogic
+    <span className="block text-lg sm:text-xl md:text-2xl font-semibold text-[#3b66a8] mt-1">
+      The Intelligence Core Behind Our AI Systems
+    </span>
+  </h2>
+
+  <p className="mt-5 max-w-3xl text-[#2f517e] leading-relaxed text-sm sm:text-base">
+    FixLogic is our proprietary Large Language Model designed to transform operational data into meaningful business intelligence. It enables smarter inventory control, improved workforce efficiency, higher quality standards, and predictive asset reliability.
+  </p>
+
+  <p className="mt-3 max-w-3xl text-[#2f517e]/90 leading-relaxed text-sm sm:text-base">
+    Securely deployed from edge to datacenter, FixLogic delivers scalable AI built for enterprise-grade stability and long-term operational excellence.
+  </p>
+</header>
 
         <section className="mt-6 md:mt-10 grid grid-cols-1 xl:grid-cols-3 gap-4 md:gap-6">
           {HARDWARE_ITEMS.map((item) => (
