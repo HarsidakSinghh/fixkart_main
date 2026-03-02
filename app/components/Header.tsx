@@ -138,8 +138,20 @@ export default function Header() {
                   <span>Download Catalog</span>
                 </a>
 
+                {/* Industry 4.0 - Desktop: Separate buttons, Mobile: Dropdown */}
+                <div className="hidden md:flex items-center gap-2">
+                  <Link href="/industry-4-0" className="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-gray-100 hover:text-gray-900 transition-all group">
+                    <Factory size={18} className="group-hover:text-[#00529b]" />
+                    <span>Industry 4.0</span>
+                  </Link>
+                  <Link href="/industry-4-0?view=hardware" className="flex items-center gap-2 px-3 py-2 rounded-full bg-[#00529b] text-white hover:bg-[#004a8f] transition-all group">
+                    <span>Explore Hardware</span>
+                  </Link>
+                </div>
+
+                {/* Mobile View: Keep the dropdown */}
                 {isIndustryPage ? (
-                  <div ref={industryDropdownRef} className="relative">
+                  <div ref={industryDropdownRef} className="md:hidden relative">
                     <button
                       type="button"
                       onClick={() => setIsIndustryDropdownOpen((prev) => !prev)}
@@ -175,7 +187,7 @@ export default function Header() {
                     </div>
                   </div>
                 ) : (
-                  <Link href="/industry-4-0" className="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-gray-100 hover:text-gray-900 transition-all group">
+                  <Link href="/industry-4-0" className="md:hidden flex items-center gap-2 px-3 py-2 rounded-full hover:bg-gray-100 hover:text-gray-900 transition-all group">
                     <Factory size={18} className="group-hover:text-[#00529b]" />
                     <span>Industry 4.0</span>
                   </Link>
