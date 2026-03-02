@@ -98,8 +98,10 @@ export default function IndustryHardwareShowcase() {
           </p>
         </header>
         <header className="mt-4 rounded-3xl border border-[#d7e7ff] bg-gradient-to-r from-white to-[#f1f7ff] p-5 sm:p-7 md:p-10 shadow-[0_25px_55px_-35px_rgba(0,65,150,0.35)]">
-          <p className="text-xs tracking-[0.2em] uppercase text-[#5f7eac] font-semibold">FixLogic : The Intelligence Core Behind Our AI Systems</p>
           
+          <h1 className="mt-3 text-2xl sm:text-3xl md:text-5xl font-extrabold leading-tight text-[#123b79]">
+          FixLogic : The Intelligence Core Behind Our AI Systems
+          </h1>
           <p className="mt-3 max-w-4xl text-[#2f517e] leading-7 text-sm sm:text-base">
           FixLogic is our proprietary Large Language Model, built to transform operational data into meaningful business insights. It powers smarter inventory control, improved workforce efficiency, higher quality standards, and predictive asset reliability. Securely deployed from edge to datacenter, FixLogic delivers scalable AI designed for enterprise grade stability and long term operational excellence.
           </p>
