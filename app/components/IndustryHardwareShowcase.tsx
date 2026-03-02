@@ -63,10 +63,10 @@ const HARDWARE_ITEMS: HardwareItem[] = [
     description:
       "High-performance on-prem AI infrastructure for large-model inference, orchestration, governance, and mission-critical operations.",
     useCases: [
-      "Enterprise process automation engines",
-      "Real-time intelligence and monitoring platforms",
-      "Large model inference and fine-tuning",
-      "AI governance and red-teaming environments",
+      "Establish a Secure, Centralized AI Operations Hub with Built In Governance & Compliance ",
+      "Automate Enterprise Workflows Using Intelligent AI Agents at Large Scale ",
+      "Deliver Real Time Intelligence, System-Wide Monitoring & Executive Decision Dashboards ",
+      "Execute Large Scale Model Inference & Fine Tuning Fully On Prem with Complete Control ",
     ],
     specs: [
       { label: "CPU", value: "Intel Xeon W7-2575X, 22 cores / 44 threads" },
@@ -89,7 +89,7 @@ export default function IndustryHardwareShowcase() {
     <div className="min-h-screen bg-gradient-to-b from-white to-[#f3f8ff] text-[#133b72]">
       <div className="max-w-[1320px] mx-auto px-4 sm:px-5 md:px-8 py-8 md:py-16">
         <header className="mt-4 rounded-3xl border border-[#d7e7ff] bg-gradient-to-r from-white to-[#f1f7ff] p-5 sm:p-7 md:p-10 shadow-[0_25px_55px_-35px_rgba(0,65,150,0.35)]">
-          <p className="text-xs tracking-[0.2em] uppercase text-[#5f7eac] font-semibold">Industry 4.0 Hardware</p>
+          <p className="text-xs tracking-[0.2em] uppercase text-[#5f7eac] font-semibold">Fixkore</p>
           <h1 className="mt-3 text-2xl sm:text-3xl md:text-5xl font-extrabold leading-tight text-[#123b79]">
             Edge to Datacenter AI Systems
           </h1>
