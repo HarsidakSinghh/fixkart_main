@@ -144,7 +144,8 @@ export default function Header() {
                     <Factory size={18} className="group-hover:text-[#00529b]" />
                     <span>Industry 4.0</span>
                   </Link>
-                  <Link href="/industry-4-0?view=hardware" className="flex items-center gap-2 px-3 py-2 rounded-full bg-[#00529b] text-white hover:bg-[#004a8f] transition-all group">
+                  <Link href="/industry-4-0?view=hardware" className="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-gray-100 hover:text-gray-900 transition-all group">
+                    <Factory size={18} className="group-hover:text-[#00529b]" />
                     <span>Explore Hardware</span>
                   </Link>
                 </div>
