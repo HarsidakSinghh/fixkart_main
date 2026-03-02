@@ -16,14 +16,14 @@ const HARDWARE_ITEMS: HardwareItem[] = [
     id: "s",
     name: "FIXCOMMAND X1",
     subtitle: "Agentic Edge AI",
-    image: "/gpu/1.png",
+    image: "/gpu/4.jpeg",
     description:
       "Compact edge system accelerated by NVIDIA AGX Jetson Orin for real-time AI in mobile and disconnected industrial deployments.",
     useCases: [
-      "Video analytics and computer vision",
-      "Autonomous systems and IoT AI",
-      "Audio/video batch inference at the edge",
-      "Remote rugged industrial operations",
+      "Detect, Analyze and Respond in Real Time",
+      "Power Autonomous Machines & Smart IoT Systems",
+      "Process Video, Audio & Sensor Data Without Cloud Dependency",
+      "Operate Seamlessly in Remote, Rugged & Zero-Connectivity Environments",
     ],
     specs: [
       { label: "GPU", value: "64GB, 2048 CUDA cores, up to 275 INT8 TOPS" },
@@ -35,7 +35,7 @@ const HARDWARE_ITEMS: HardwareItem[] = [
   },
   {
     id: "m",
-    name: "FIXCOMMAND X2",
+    name: "FIXCOMMAND X3",
     subtitle: "Desktop Private AI",
     image: "/gpu/1.png",
     description:
@@ -56,7 +56,7 @@ const HARDWARE_ITEMS: HardwareItem[] = [
   },
   {
     id: "xl",
-    name: "FIXCOMMAND X3",
+    name: "FIXCOMMAND X5",
     subtitle: "Datacenter-Grade Private Agentic AI",
     image: "/gpu/2.png",
     description:
