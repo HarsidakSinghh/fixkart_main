@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getFinalCustomerPrice } from "@/lib/pricing";
 import { normalizeImageSrc } from "@/lib/image";
+import { getProductTypeFallbackImage } from "@/lib/productTypeImage";
 
 export const dynamic = "force-dynamic";
 
@@ -69,6 +70,19 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {products.map((product) => {
                 const finalPrice = getFinalCustomerPrice(product.price, product.specs as Record<string, unknown> | null);
+                // Fallback logic: use custom image if available, otherwise use subcategory image
+                const rawCustomImage = product.image || product.imagePath;
+                const normalizedProductImage = normalizeImageSrc(rawCustomImage);
+                const hasCustomImage =
+                  typeof rawCustomImage === "string" &&
+                  rawCustomImage.trim().length > 0 &&
+                  normalizedProductImage !== "/fixkart-logo.png";
+                const typeFallbackImage = getProductTypeFallbackImage({
+                  subSubCategory: product.subSubCategory,
+                  subCategory: product.subCategory,
+                  listingTitle: product.name,
+                });
+                const resolvedImage = hasCustomImage ? normalizedProductImage : typeFallbackImage;
                 return (
                 <Link 
                   key={product.id} 
@@ -77,7 +91,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                 >
                   <div className="relative h-48 w-full bg-gray-50 border-b border-gray-100">
                     <Image
-                      src={normalizeImageSrc(product.image)}
+                      src={resolvedImage}
                       alt={product.name}
                       fill
                       className="object-contain p-4 group-hover:scale-105 transition-transform duration-300"

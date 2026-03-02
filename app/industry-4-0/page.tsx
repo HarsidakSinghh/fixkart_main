@@ -147,6 +147,31 @@ export default async function Industry40Page({
             ))}
           </ul>
         </section>
+
+        {/* CTA Section - Explore Hardware */}
+        <section className="mt-12 rounded-3xl border border-[#d7e7ff] bg-gradient-to-br from-[#f8fbff] to-[#e8f1ff] p-8 md:p-12 shadow-[0_20px_50px_-35px_rgba(0,65,150,0.4)]">
+          <div className="text-center max-w-2xl mx-auto">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#00529b]/10 mb-6">
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-[#00529b]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2 2-2H7 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+              </svg>
+            </div>
+            <h2 className="text-2xl md:text-3xl font-bold text-[#123b79]">Ready to Explore Our Hardware?</h2>
+            <p className="mt-4 text-[#31537f] leading-7 text-sm md:text-base">
+              Discover our cutting-edge AI hardware solutions tailored for industrial applications. 
+              From edge computing to enterprise-grade systems, find the perfect hardware to power your Industry 4.0 initiatives.
+            </p>
+            <a 
+              href="/industry-4-0?view=hardware"
+              className="inline-flex items-center gap-2 mt-8 px-6 py-3 bg-[#00529b] text-white font-semibold rounded-full hover:bg-[#004a8f] transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+            >
+              <span>Explore Hardware</span>
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
+        </section>
       </div>
     </div>
   );
