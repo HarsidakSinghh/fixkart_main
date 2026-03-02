@@ -139,21 +139,24 @@ export default function Header() {
                 </a>
 
                 {isIndustryPage ? (
-                  <div ref={industryDropdownRef} className="relative group">
+                  <div ref={industryDropdownRef} className="relative">
                     <button
                       type="button"
                       onClick={() => setIsIndustryDropdownOpen((prev) => !prev)}
                       className="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-gray-100 hover:text-gray-900 transition-all cursor-pointer touch-manipulation"
                     >
-                      <Factory size={18} className="group-hover:text-[#00529b]" />
+                      <Factory size={18} className="text-gray-600" />
                       <span>Industry 4.0</span>
-                      <ChevronDown size={16} className="text-gray-500 group-hover:text-[#00529b]" />
+                      <ChevronDown
+                        size={16}
+                        className={`text-gray-500 transition-transform ${isIndustryDropdownOpen ? "rotate-180" : ""}`}
+                      />
                     </button>
 
                     <div
-                      className={`hidden md:block absolute top-full left-0 mt-1 w-52 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden z-50 ${
-                        isIndustryDropdownOpen ? "block" : "hidden"
-                      } md:group-hover:block`}
+                      className={`absolute top-full left-0 mt-1 w-52 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden z-50 ${
+                        isIndustryDropdownOpen ? "hidden md:block" : "hidden"
+                      }`}
                     >
                       <Link
                         href="/industry-4-0"

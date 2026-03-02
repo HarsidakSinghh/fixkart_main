@@ -4,6 +4,7 @@ import Link from "next/link";
 import { INVENTORY_DATA } from "@/app/data/inventory"; 
 import { getFinalCustomerPrice } from "@/lib/pricing";
 import { normalizeImageSrc } from "@/lib/image";
+import { getProductTypeFallbackImage } from "@/lib/productTypeImage";
 
 export const dynamic = "force-dynamic"; // Ensures we don't cache old data
 
@@ -44,15 +45,6 @@ export default async function BrowseSubCategoryPage({
     subCategoryTerm = slug.replace(/-/g, " ");
     displayTitle = subCategoryTerm;
   }
-
-  const defaultTypeImage = (() => {
-    for (const category of INVENTORY_DATA) {
-      const matched = category.items.find((item) => normalize(item.name) === normalize(displayTitle));
-      if (matched?.imagePath) return normalizeImageSrc(matched.imagePath);
-    }
-    return "/fixkart-logo.png";
-  })();
-
 
   // 5. Fetch Products (approved + published only)
   const filteredProducts = await prisma.product.findMany({
@@ -118,13 +110,19 @@ export default async function BrowseSubCategoryPage({
           <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-6">
             {filteredProducts.map((product) => {
               const finalPrice = getFinalCustomerPrice(product.price, product.specs as Record<string, unknown> | null);
-              const normalizedProductImage = normalizeImageSrc(product.image || product.imagePath);
-              // On product-type listing pages, prioritize the type image so cards stay consistent
-              // even when vendor-uploaded product image paths are invalid/missing.
+              const rawCustomImage = product.image || product.imagePath;
+              const normalizedProductImage = normalizeImageSrc(rawCustomImage);
+              const hasCustomImage =
+                typeof rawCustomImage === "string" &&
+                rawCustomImage.trim().length > 0 &&
+                normalizedProductImage !== "/fixkart-logo.png";
+              const typeFallbackImage = getProductTypeFallbackImage({
+                subSubCategory: product.subSubCategory,
+                subCategory: product.subCategory,
+                listingTitle: displayTitle,
+              });
               const resolvedImage =
-                defaultTypeImage !== "/fixkart-logo.png"
-                  ? defaultTypeImage
-                  : normalizedProductImage;
+                hasCustomImage ? normalizedProductImage : typeFallbackImage;
               return (
               <div key={product.id} className="bg-white rounded-xl shadow-sm border border-gray-100 p-3 hover:shadow-md transition-all relative group">
                 <Link href={`/product/${product.slug}`} className="block">

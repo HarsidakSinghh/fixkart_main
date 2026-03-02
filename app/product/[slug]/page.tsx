@@ -17,6 +17,7 @@ import ProductActions from "./../../components/ProductActions";
 import ProductImageGallery from "@/components/ProductImageGallery";
 import { getFinalCustomerPrice, stripCommissionSpecs } from "@/lib/pricing";
 import { normalizeImageSrc } from "@/lib/image";
+import { getProductTypeFallbackImage } from "@/lib/productTypeImage";
 
 export const dynamic = "force-dynamic";
 
@@ -51,7 +52,18 @@ export default async function ProductDetailsPage({
   const fakeMrp = Math.round(finalPrice * 1.25);
   const discountPercent = fakeMrp > 0 ? Math.round(((fakeMrp - finalPrice) / fakeMrp) * 100) : 0;
   const productForCustomer = { ...product, price: finalPrice };
-  const normalizedMainImage = normalizeImageSrc(product.image);
+  const rawMainImage = product.image || product.imagePath;
+  const normalizedMainImage = normalizeImageSrc(rawMainImage);
+  const hasCustomMainImage =
+    typeof rawMainImage === "string" &&
+    rawMainImage.trim().length > 0 &&
+    normalizedMainImage !== "/fixkart-logo.png";
+  const typeFallbackImage = getProductTypeFallbackImage({
+    subSubCategory: product.subSubCategory,
+    subCategory: product.subCategory,
+    listingTitle: product.title || product.name,
+  });
+  const resolvedMainImage = hasCustomMainImage ? normalizedMainImage : typeFallbackImage;
   const normalizedGallery = (product.gallery || []).map((img) => normalizeImageSrc(img));
 
   return (
@@ -88,7 +100,7 @@ export default async function ProductDetailsPage({
           <div className="lg:col-span-5">
              <div className="sticky top-24">
                 <ProductImageGallery 
-                  mainImage={normalizedMainImage} 
+                  mainImage={resolvedMainImage} 
                   gallery={normalizedGallery} 
                   title={product.title || product.name} 
                 />
