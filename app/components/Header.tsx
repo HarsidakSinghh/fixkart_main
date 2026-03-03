@@ -1,20 +1,18 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation"; 
+import { usePathname } from "next/navigation"; 
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 import { 
   LayoutGrid, 
   Wallet, 
   Factory, 
-  ChevronDown,
   Phone, 
   Mail, 
   MessageCircle, 
   ShoppingBag,
-  Menu,
-  Brain
+  Menu
 } from "lucide-react";
 
 import SearchBar from "./Searchbar";
@@ -23,38 +21,9 @@ import MobileMenu from "./MobileMenu";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isIndustryDropdownOpen, setIsIndustryDropdownOpen] = useState(false);
   const pathname = usePathname(); 
-  const router = useRouter();
-  const industryDropdownRef = useRef<HTMLDivElement | null>(null);
-  const industryMobilePanelRef = useRef<HTMLDivElement | null>(null);
   
-  const showHamburger = pathname === "/"; 
-  const isIndustryPage = pathname?.startsWith("/industry-4-0");
-
-  const navigateIndustryView = (target: "overview" | "hardware") => {
-    setIsIndustryDropdownOpen(false);
-    router.push(target === "hardware" ? "/industry-4-0?view=hardware" : "/industry-4-0");
-  };
-
-  useEffect(() => {
-    setIsIndustryDropdownOpen(false);
-  }, [pathname]);
-
-  useEffect(() => {
-    function handleOutsideClick(event: MouseEvent) {
-      const target = event.target as Node;
-      const clickedDropdownTrigger = industryDropdownRef.current?.contains(target);
-      const clickedMobilePanel = industryMobilePanelRef.current?.contains(target);
-
-      if (!clickedDropdownTrigger && !clickedMobilePanel) {
-        setIsIndustryDropdownOpen(false);
-      }
-    }
-
-    document.addEventListener("mousedown", handleOutsideClick);
-    return () => document.removeEventListener("mousedown", handleOutsideClick);
-  }, []);
+  const showHamburger = pathname === "/";
 
   // --- CONTACT CONFIGURATION ---
   const WHATSAPP_NUMBER = "918699466669"; // Your Number
@@ -139,7 +108,7 @@ export default function Header() {
                   <span>Download Catalog</span>
                 </a>
 
-                {/* Industry 4.0 - Desktop: Separate buttons, Mobile: Dropdown */}
+                {/* Industry 4.0 - Desktop: Separate buttons */}
                 <div className="hidden md:flex items-center gap-2">
                   <Link href="/industry-4-0" className="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-gray-100 hover:text-gray-900 transition-all group">
                     <Factory size={18} className="group-hover:text-[#00529b]" />
@@ -151,49 +120,17 @@ export default function Header() {
                   </Link>
                 </div>
 
-                {/* Mobile View: Keep the dropdown */}
-                {isIndustryPage ? (
-                  <div ref={industryDropdownRef} className="md:hidden relative">
-                    <button
-                      type="button"
-                      onClick={() => setIsIndustryDropdownOpen((prev) => !prev)}
-                      className="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-gray-100 hover:text-gray-900 transition-all cursor-pointer touch-manipulation"
-                    >
-                      <Factory size={18} className="text-gray-600" />
-                      <span>Industry 4.0</span>
-                      <ChevronDown
-                        size={16}
-                        className={`text-gray-500 transition-transform ${isIndustryDropdownOpen ? "rotate-180" : ""}`}
-                      />
-                    </button>
-
-                    <div
-                      className={`absolute top-full left-0 mt-1 w-52 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden z-50 ${
-                        isIndustryDropdownOpen ? "hidden md:block" : "hidden"
-                      }`}
-                    >
-                      <Link
-                        href="/industry-4-0"
-                        onClick={() => setIsIndustryDropdownOpen(false)}
-                        className="block px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-[#00529b] transition-colors border-b border-gray-50"
-                      >
-                        Overview
-                      </Link>
-                      <Link
-                        href="/industry-4-0?view=hardware"
-                        onClick={() => setIsIndustryDropdownOpen(false)}
-                        className="block px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-[#00529b] transition-colors"
-                      >
-                        Explore Hardware
-                      </Link>
-                    </div>
-                  </div>
-                ) : (
-                  <Link href="/industry-4-0" className="md:hidden flex items-center gap-2 px-3 py-2 rounded-full hover:bg-gray-100 hover:text-gray-900 transition-all group">
+                {/* Mobile View: Show Industry 4.0 and Fixkore as separate buttons (same as desktop) */}
+                <div className="md:hidden flex items-center gap-2">
+                  <Link href="/industry-4-0" className="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-gray-100 hover:text-gray-900 transition-all group">
                     <Factory size={18} className="group-hover:text-[#00529b]" />
                     <span>Industry 4.0</span>
                   </Link>
-                )}
+                  <Link href="/industry-4-0?view=hardware" className="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-gray-100 hover:text-gray-900 transition-all group">
+                    <img src="/gpu/fixkore.png" alt="Fixkore" className="h-6 w-6 object-contain" />
+                    <span>Fixkore</span>
+                  </Link>
+                </div>
               </div>
 
               <div className="flex items-center gap-2 md:gap-4 text-sm font-bold text-gray-600 whitespace-nowrap ml-auto">
@@ -244,26 +181,6 @@ export default function Header() {
           </div>
         </div>
 
-        {isIndustryPage && isIndustryDropdownOpen && (
-          <div ref={industryMobilePanelRef} className="md:hidden border-b border-gray-200 bg-white shadow-sm">
-            <div className="max-w-[1400px] mx-auto px-4 py-2 space-y-1">
-              <Link
-                href="/industry-4-0"
-                onClick={() => setIsIndustryDropdownOpen(false)}
-                className="block rounded-lg px-3 py-2 text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-[#00529b] transition-colors"
-              >
-                Overview
-              </Link>
-              <button
-                type="button"
-                onClick={() => navigateIndustryView("hardware")}
-                className="block w-full text-left rounded-lg px-3 py-2 text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-[#00529b] transition-colors"
-              >
-                Explore Hardware
-              </button>
-            </div>
-          </div>
-        )}
       </header>
 
       <MobileMenu 

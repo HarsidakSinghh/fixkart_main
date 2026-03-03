@@ -97,6 +97,9 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
            <a href="/industry-4-0" onClick={onClose} className="block text-center text-sm font-bold text-gray-700 py-2 hover:text-[#00529b] transition-colors">
              Industry 4.0
            </a>
+           <a href="/industry-4-0?view=hardware" onClick={onClose} className="block text-center text-sm font-bold text-gray-700 py-2 hover:text-[#00529b] transition-colors">
+             Fixkore
+           </a>
            <a href="/orders" onClick={onClose} className="block text-center text-sm font-bold text-[#00529b] py-2">
              View My Orders
            </a>
